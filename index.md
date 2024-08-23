@@ -6,7 +6,7 @@ atom: true
 ---
 
 <div class="callout" markdown="1">
-  <h1 class="preamble">Swift 是一款<strong>通用</strong>编程语言。<br/>新手<strong>易学</strong>专家<strong>诚信</strong><span>Swift <strong>快速</strong>、<strong>现代</strong>、<strong>安全</strong>，<br/>写起代码<strong>乐无边</strong>。</span></h1>
+  <h1 class="preamble">Swift 是一款<strong>通用</strong>编程语言。<br/>新手<strong>易学</strong>，专家<strong>称心</strong><span>Swift <strong>快速</strong>、<strong>现代</strong>、<strong>安全</strong>，<br/>写起代码<strong>乐无边</strong>。</span></h1>
 
 {% for snippet in site.data.featured_snippets %}
 ```swift
