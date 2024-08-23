@@ -6,7 +6,7 @@ layout: base
   <header>
     <h1>{{ page.title }}</h1>
 
-    <time pubdate datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+    <time pubdate datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y 年 %m 月 %d 日" }}</time>
     {% include authors.html authors=page.author compact=true %}
   </header>
 
@@ -14,18 +14,18 @@ layout: base
 
   <footer>
     {% if page.author %}
-      <p>Written by</p>
+      <p>撰稿人</p>
       {% include authors.html authors=page.author %}
     {% endif %}
 
     {% if page.previous or page.next %}
     <nav>
       {% if page.previous %}
-      <a href="{{ page.previous.url }}" rel="prev" title="Previous: {{ page.previous.title | escape }}">{{ page.previous.title }}</a>
+      <a href="{{ page.previous.url }}" rel="prev" title="上一篇: {{ page.previous.title | escape }}">{{ page.previous.title }}</a>
       {% endif %}
 
       {% if page.next %}
-      <a href="{{ page.next.url }}" rel="next" title="Next: {{ page.next.title | escape }}">{{ page.next.title }}</a>
+      <a href="{{ page.next.url }}" rel="next" title="下一篇: {{ page.next.title | escape }}">{{ page.next.title }}</a>
       {% endif %}
     </nav>
     {% endif %}
@@ -34,7 +34,7 @@ layout: base
 </main>
 
 {% capture licenseinfo %}
-  <p>Except where otherwise noted, all content on this blog is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International license</a>.</p>
+<p>除另有说明外，本博客的所有内容均采用 <a href=“https://creativecommons.org/licenses/by/4.0/”>创作共用署名 4.0 国际许可</a>。</p> </p>
 {% endcapture %}
 
 {% include footer.html licenseinfo=licenseinfo %}

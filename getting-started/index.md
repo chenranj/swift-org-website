@@ -1,6 +1,6 @@
 ---
 layout: page-wide
-title: Getting Started
+title: 开始使用
 ---
 
 {% include getting-started/_installing.md %}

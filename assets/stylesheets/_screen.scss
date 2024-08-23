@@ -206,7 +206,7 @@ h2.header-with-anchor {
 
   a {
     display: flex;
-    width: 120px;
+    width: 200px;
   }
 
   svg {
@@ -505,6 +505,14 @@ footer[role="contentinfo"] {
     max-width: 700px;
 
     i {
+      &.github {
+        background-image: url("/assets/images/icon-github.svg");
+      }
+
+      &.feed {
+        background-image: url("/assets/images/icon-feed.svg");
+      }
+
       width: 16px;
       height: 16px;
       background-repeat: no-repeat;
