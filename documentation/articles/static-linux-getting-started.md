@@ -1,165 +1,116 @@
 ---
 layout: page
 date: 2024-06-04 12:00:00
-title: Getting Started with the Static Linux SDK
+title: 开始使用静态 Linux SDK
 author: [al45tair]
 ---
 
-It's well known that Swift can be used to build software for Apple
-platforms such as macOS or iOS, but Swift is also supported on other
-platforms, including Linux and Windows.
+众所周知，Swift 可以用于构建 Apple 平台（如 macOS 或 iOS）的软件，但 Swift 也支持其他平台，包括 Linux 和 Windows。
 
-Building for Linux is especially interesting because, historically,
-Linux programs written in Swift needed to ensure that a copy of the
-Swift runtime---and all of its dependencies---was installed on the
-target system.  Additionally, a program built for a particular
-distribution, or even a particular major version of a particular
-distribution, would not necessarily run on any other distribution or
-in some cases even on a different major version of the same
-distribution.
+在 Linux 上构建特别有趣，因为从历史上看，用 Swift 编写的 Linux 程序需要确保目标系统上安装了 Swift 运行时及其所有依赖项。此外，为特定发行版或特定发行版的特定主要版本构建的程序不一定能在任何其他发行版上运行，在某些情况下甚至不能在同一发行版的不同主要版本上运行。
 
-The Swift Static Linux SDK solves both of these problems by allowing
-you to build your program as a _fully statically linked_ executable,
-with no external dependencies at all (not even the C library), which
-means that it will run on _any_ Linux distribution as the only thing
-it depends on is the Linux system call interface.
+Swift 静态 Linux SDK 通过允许你将程序构建为_完全静态链接_的可执行文件来解决这两个问题，没有任何外部依赖（甚至不依赖 C 库），这意味着它将在_任何_ Linux 发行版上运行，因为它只依赖 Linux 系统调用接口。
 
-Additionally, the Static Linux SDK can be used from any platform
-supported by the Swift compiler and package manager; this means that
-you can develop and test your program on macOS before building and
-deploying it to a Linux-based server, whether running locally or
-somewhere in the cloud.
+此外，静态 Linux SDK 可以从 Swift 编译器和包管理器支持的任何平台使用；这意味着你可以在 macOS 上开发和测试你的程序，然后再构建并部署到基于 Linux 的服务器，无论是在本地运行还是在云中的某个地方。
 
-### Static vs Dynamic Linking
+### 静态与动态链接
 
-_Linking_ is the process of taking different pieces of a computer
-program and wiring up any references between those pieces.  For
-_static_ linking, generally speaking those pieces are _object files_,
-or _static libraries_ (which are really just collections of object
-files).
+_链接_是将计算机程序的不同部分连接起来并连接它们之间的任何引用的过程。对于_静态_链接，通常这些部分是_目标文件_，或_静态库_（实际上只是目标文件的集合）。
 
-For _dynamic_ linking, the pieces are _executables_ and _dynamic
-libraries_ (aka dylibs, shared objects, or DLLs).
+对于_动态_链接，这些部分是_可执行文件_和_动态库_（又称 dylibs、共享对象或 DLL）。
 
-There are two key differences between dynamic and static linking:
+静态和动态链接之间有两个关键区别：
 
-* The time at which linking takes place.  Static linking happens when
-  you build your program; dynamic linking happens at runtime.
+* 链接发生的时间。静态链接发生在构建程序时；动态链接发生在运行时。
 
-* The fact that a static library (or _archive_) is really a collection
-  of individual object files, whereas a dynamic library is monolithic.
+* 静态库（或_归档_）实际上是单个目标文件的集合，而动态库是单体的这一事实。
 
-The latter is important because traditionally, the static linker will
-include every object explicitly listed on its command line, but it
-will _only_ include an object from a static library if doing so lets
-it resolve an unresolved symbolic reference.  If you statically link
-against a library that you do not actually use, a traditional static
-linker will completely discard that library and not include any code
-from it in your final binary.
+后者很重要，因为传统上，静态链接器会包含命令行上明确列出的每个对象，但它_只会_从静态库中包含一个对象，如果这样做可以让它解析未解决的符号引用。如果你静态链接了一个你实际上没有使用的库，传统的静态链接器会完全丢弃该库，不会在你的最终二进制文件中包含任何来自它的代码。
 
-In practice, things can be more complicated---the static linker may
-actually work on the basis of individual _sections_ or _atoms_ from
-your object files, so it may in fact be able to discard individual
-functions or pieces of data rather than just whole objects.
+在实践中，情况可能更复杂——静态链接器实际上可能基于你的目标文件中的单个_节_或_原子_工作，所以它实际上可能能够丢弃单个函数或数据片段，而不仅仅是整个对象。
 
-### Pros and Cons of Static Linking
+### 静态链接的优缺点
 
-Pros of static linking:
+静态链接的优点：
 
-* No runtime overhead.
+* 没有运行时开销。
 
-* Only include code from libraries that is actually needed.
+* 只包含实际需要的库代码。
 
-* No need for separately installed dynamic libraries.
+* 不需要单独安装动态库。
 
-* No versioning issues at runtime.
+* 运行时没有版本问题。
 
-Cons of static linking:
+静态链接的缺点：
 
-* Programs cannot share code (higher overall memory usage).
+* 程序不能共享代码（总体内存使用更高）。
 
-* No way to update dependencies without rebuilding program.
+* 无法在不重新构建程序的情况下更新依赖项。
 
-* Larger executables (though this can be offset by not having to
-  install separate dynamic libraries).
+* 可执行文件更大（尽管这可以通过不必安装单独的动态库来抵消）。
 
-On Linux in particular, it's also possible to use static linking to
-completely eliminate dependencies on system libraries supplied by the
-distribution, resulting in executables that work on any distribution
-and can be installed by simply copying.
+特别是在 Linux 上，也可以使用静态链接来完全消除对发行版提供的系统库的依赖，从而生成在任何发行版上都能工作的可执行文件，并且可以通过简单复制来安装。
 
-### Installing the SDK
+### 安装 SDK
 
-Before you start, it's important to note:
+在开始之前，重要的是要注意：
 
-* You will need to [install an Open Source toolchain from
-  swift.org](/install/).
+* 你需要[从 swift.org 安装开源工具链](/install/)。
 
-* You cannot use the toolchain provided with Xcode to build programs
-  using the SDK.
+* 你不能使用 Xcode 提供的工具链来使用 SDK 构建程序。
 
-* If you are using macOS, you will also need to ensure that you use
-  the Swift compiler from this toolchain by [following the
-  instructions
-  here](/install/macos/package_installer/).
+* 如果你使用 macOS，你还需要确保通过[按照这里的说明](/install/macos/package_installer/)使用这个工具链中的 Swift 编译器。
 
-* The toolchain must match the version of the Static Linux SDK that
-  you install.  The Static Linux SDK includes the corresponding Swift
-  version in its filename to help identify the correct version of the
-  SDK.
+* 工具链必须与你安装的静态 Linux SDK 版本匹配。静态 Linux SDK 在其文件名中包含相应的 Swift 版本，以帮助识别正确版本的 SDK。
 
-* When installing Swift SDKs from remote URLs, you have to pass a
-  `--checksum` option with the corresponding checksum provided by the
-  author of the Swift SDK.
+* 当从远程 URL 安装 Swift SDK 时，你必须传递一个 `--checksum` 选项，其中包含 SDK 作者提供的相应校验和。
 
-Once that is out of the way, actually installing the Static Linux SDK
-is easy; at a prompt, enter
+一旦这些都准备好了，实际安装静态 Linux SDK 很简单；在提示符下输入
 
 ```console
-$ swift sdk install <URL-or-filename-here> [--checksum <checksum-for-archive-URL>]
+$ swift sdk install <URL-或-文件名> [--checksum <归档-URL-的校验和>]
 ```
 
-giving the URL (and a corresponding checksum) or filename at which the SDK can be found.
+提供 SDK 可以找到的 URL（和相应的校验和）或文件名。
 
-For instance, assuming you have installed the
-`swift-6.0-DEVELOPMENT-SNAPSHOT-2024-07-02-a` toolchain, you would
-need to enter
+例如，假设你已经安装了 `swift-6.0-DEVELOPMENT-SNAPSHOT-2024-07-02-a` 工具链，你需要输入
 
 ```console
 $ swift sdk install https://download.swift.org/swift-6.0-branch/static-sdk/swift-6.0-DEVELOPMENT-SNAPSHOT-2024-07-02-a/swift-6.0-DEVELOPMENT-SNAPSHOT-2024-07-02-a_static-linux-0.0.1.artifactbundle.tar.gz --checksum 42a361e1a240e97e4bb3a388f2f947409011dcd3d3f20b396c28999e9736df36
 ```
 
-to install the corresponding Static Linux SDK.
+来安装相应的静态 Linux SDK。
 
-Swift will download and install the SDK on your system.  You can get a
-list of installed SDKs with
+Swift 将下载并在你的系统上安装 SDK。你可以使用
 
 ```console
 $ swift sdk list
 ```
 
-and it's also possible to remove them using
+列出已安装的 SDK，也可以使用
 
 ```console
-$ swift sdk remove <name-of-SDK>
+$ swift sdk remove <SDK-名称>
 ```
 
-### Your first statically linked Linux program
+来移除它们。
 
-First, create a directory to hold your code:
+### 你的第一个静态链接的 Linux 程序
+
+首先，创建一个目录来存放你的代码：
 
 ```console
 $ mkdir hello
 $ cd hello
 ```
 
-Next, ask Swift to create a new program package for you:
+接下来，让 Swift 为你创建一个新的程序包：
 
 ```console
 $ swift package init --type executable
 ```
 
-You can build and run this locally:
+你可以在本地构建和运行这个程序：
 
 ```console
 $ swift build
@@ -170,8 +121,7 @@ $ .build/debug/hello
 Hello, world!
 ```
 
-But with the Static Linux SDK installed, you can also build Linux
-binaries for x86-64 and ARM64 machines:
+但有了静态 Linux SDK，你也可以为 x86-64 和 ARM64 机器构建 Linux 二进制文件：
 
 ```console
 $ swift build --swift-sdk x86_64-swift-linux-musl
@@ -191,7 +141,7 @@ $ file .build/aarch64-swift-linux-musl/debug/hello
 .build/aarch64-swift-linux-musl/debug/hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with debug_info, not stripped
 ```
 
-These can be copied to an appropriate Linux-based system and executed:
+这些可以复制到适当的基于 Linux 的系统并执行：
 
 ```console
 $ scp .build/x86_64-swift-linux-musl/debug/hello linux:~/hello
@@ -199,12 +149,9 @@ $ ssh linux ~/hello
 Hello, world!
 ```
 
-### What about package dependencies?
+### 包依赖项呢？
 
-Swift packages that make use of Foundation or Swift NIO should just
-work.  If you try to use a package that uses the C library, however,
-you may have a little work to do.  Such packages often contain files
-with code like the following:
+使用 Foundation 或 Swift NIO 的 Swift 包应该可以直接工作。但是，如果你尝试使用使用 C 库的包，你可能需要做一些工作。这样的包通常包含类似以下代码的文件：
 
 ```swift
 #if os(macOS) || os(iOS)
@@ -218,18 +165,13 @@ import ucrt
 #endif
 ```
 
-The Static Linux SDK does not use Glibc; instead, it is built on top
-of an alternative C library for Linux called
-[Musl](https://musl-libc.org).  We chose this approach for two
-reasons:
+静态 Linux SDK 不使用 Glibc；相反，它建立在一个名为 [Musl](https://musl-libc.org) 的替代 C 库之上。我们选择这种方法有两个原因：
 
-1. Musl has excellent support for static linking.
+1. Musl 对静态链接有出色的支持。
 
-2. Musl is permissively licensed, which makes it easy to distribute
-   executables statically linked with it.
+2. Musl 采用许可宽松的许可证，这使得分发静态链接它的可执行文件变得容易。
 
-If you are using such a dependency, you will therefore need to adjust
-it to import the `Musl` module instead of the `Glibc` module:
+如果你使用这样的依赖项，你将需要调整它以导入 `Musl` 模块而不是 `Glibc` 模块：
 
 ```swift
 #if os(macOS) || os(iOS)
@@ -245,23 +187,12 @@ import ucrt
 #endif
 ```
 
-Occasionally there might be a difference between the way a C library
-type gets imported between Musl and Glibc; this sometimes happens if
-someone has added nullability annotations, or where a pointer type is
-using a forward-declared `struct` for which no actual definition is
-ever provided.  Usually the problem will be obvious---a function
-argument or result will be `Optional` in one case and non-`Optional`
-in another, or a pointer type will be imported as `OpaquePointer`
-rather than `UnsafePointer<FOO>`.
+偶尔可能会出现 C 库类型在 Musl 和 Glibc 之间导入方式的差异；如果有人添加了空值性注释，或者当指针类型使用前向声明的 `struct` 但从未提供实际定义时，有时会发生这种情况。通常问题很明显——函数参数或结果在一种情况下是 `Optional` 而在另一种情况下不是，或者指针类型被导入为 `OpaquePointer` 而不是 `UnsafePointer<FOO>`。
 
-If you do find yourself needing to make these kinds of adjustments,
-you can make your local copy of the package dependency editable by
-doing
+如果你发现自己需要进行这些类型的调整，你可以通过执行
 
 ```console
 $ swift package edit SomePackage
 ```
 
-and then editing the files in the `Packages` directory that appears in
-your program's source directory.  You may wish to consider raising PRs
-upstream with any fixes you may have.
+使包依赖项可编辑，然后编辑出现在你的程序源目录中的 `Packages` 目录中的文件。你可能希望考虑向上游提交带有任何修复的 PR。

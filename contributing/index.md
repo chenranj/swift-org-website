@@ -1,21 +1,19 @@
 ---
 layout: page
-title: Contributing
+title: 贡献
 ---
 
-Everyone is welcome to contribute to Swift.
-Contributing doesn't just mean submitting pull requests---there
-are many different ways for you to get involved,
-including answering questions on the forums,
-reporting or triaging bugs, and participating in the Swift evolution process.
+我们欢迎每个人为 Swift 做出贡献。
+贡献不仅仅意味着提交拉取请求——有
+许多不同的方式让你参与进来，
+包括在论坛上回答问题、
+报告或分类错误，以及参与 Swift 演进过程。
 
-No matter how you want to get involved,
-we ask that you first learn what's expected
-of anyone who participates in the project
-by reading the [Community Overview](/community).
-If you're contributing code, you should also know how to build and run
-Swift from the repository,
-as described in [Source Code](/documentation/source-code).
+无论你想如何参与，
+我们都要求你首先通过阅读[社区概述](/community)了解
+项目中任何参与者应该遵循的准则。
+如果你要贡献代码，你还应该知道如何从代码库构建和运行
+Swift，这在[源代码](/documentation/source-code)中有描述。
 
 {% include_relative _answering-questions.md %}
 {% include_relative _reporting-bugs.md %}

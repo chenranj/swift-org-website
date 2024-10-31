@@ -1,28 +1,28 @@
-## Triaging Bugs
+## 分类错误
 
-Reporting bugs is an important part of improving software.
-Nearly as important is triaging those bugs
-to ensure that they are reproducible, small, and unique.
+报告错误是改进软件的重要部分。
+几乎同样重要的是对这些错误进行分类，
+以确保它们是可重现的、简单的和独特的。
 
-There are a number of things you can do to help triage bugs
-in the [bug tracker][bugtracker].
+你可以做很多事情来帮助分类
+[错误追踪系统][bugtracker]中的错误。
 
-- **Reproduce bugs**.
-  For a bug to be actionable,
-  it needs to be reproducible.
-  If you can't reproduce the bug,
-  try to figure out why.
-  Get in touch with the submitter if you need more information.
+- **重现错误**。
+  要使错误可操作，
+  它需要是可重现的。
+  如果你不能重现错误，
+  试着找出原因。
+  如果你需要更多信息，请联系提交者。
 
-- **Reduce bugs**.
-  Once a bug can be reproduced,
-  reduce it to the smallest amount of code possible.
-  Reasoning about a sample that reproduces a bug in just a few lines of Swift code
-  is easier than reasoning about a longer sample.
+- **简化错误**。
+  一旦错误可以重现，
+  将其减少到尽可能少的代码。
+  对于一个只需几行 Swift 代码就能重现错误的样本进行推理
+  比对一个更长的样本进行推理更容易。
 
-- **Eliminate duplicate bugs**.
-  If two bug reports refer to the same underlying problem,
-  mark the newer one as a duplicate of the older one.
-  Doing so allows others to work more effectively.
+- **消除重复错误**。
+  如果两个错误报告指向同一个底层问题，
+  将较新的标记为较旧的重复。
+  这样做可以让其他人更有效地工作。
 
 [bugtracker]: https://github.com/swiftlang/swift/issues

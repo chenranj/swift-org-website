@@ -1,19 +1,19 @@
 ---
 layout: page
-title: Diversity in Swift
+title: Swift 多样性
 ---
 
-**Diversity in Swift** is an effort focused on further elevating diverse voices within the Swift community, and making it easier to start learning or contributing to Swift, regardless of your background.
+**Swift 多样性**是一项致力于进一步提升 Swift 社区内多元化声音，并使学习或为 Swift 做贡献变得更容易的努力，无论你的背景如何。
 
-## Mission
+## 使命
 
-The mission of Diversity in Swift is to foster an inclusive Swift community by creating more pathways for a diverse group of developers, increasing the engagement and retention of those developers, and helping developers of all backgrounds establish leadership and technical expertise within the community. Our differences in identity and experience enrich our community with new ideas and perspectives, and we are committed to ensuring that everybody feels supported and valued in the Swift community.
+Swift 多样性的使命是通过为不同群体的开发者创造更多途径、增加这些开发者的参与度和保留率，以及帮助所有背景的开发者在社区内建立领导力和技术专长来培养一个包容的 Swift 社区。我们在身份和经历上的差异为我们的社区带来了新的想法和观点，我们致力于确保每个人在 Swift 社区中都感到受到支持和重视。
 
-## Workgroup
+## 工作组
 
-The Diversity in Swift workgroup is made up of Swift community members from various organizations and backgrounds. Members of the workgroup will serve for two years, and they are all volunteers working to fulfill the Diversity in Swift mission.
+Swift 多样性工作组由来自各个组织和背景的 Swift 社区成员组成。工作组成员将任职两年，他们都是志愿者，致力于实现 Swift 多样性的使命。
 
-The current Diversity in Swift workgroup consists of the following people:
+当前的 Swift 多样性工作组由以下成员组成：
 
 * Devanshi Modha ([@devanshimodha](https://forums.swift.org/u/devanshimodha))
 * Holly Borla ([@hborla](https://forums.swift.org/u/hborla/))
@@ -21,35 +21,34 @@ The current Diversity in Swift workgroup consists of the following people:
 * Marc Aupont ([@digimarktech](https://forums.swift.org/u/digimarktech))
 * Timirah James ([@timirahj](https://forums.swift.org/u/timirahj))
 
-You can reach the Diversity in Swift workgroup on the Swift Forums as [@diversity-workgroup](https://forums.swift.org/g/diversity-workgroup).
+你可以在 Swift 论坛上通过 [@diversity-workgroup](https://forums.swift.org/g/diversity-workgroup) 联系 Swift 多样性工作组。
 
-## Community Groups
+## 社区群组
 
-To support various members of our Swift community, we have created specific community groups for developers to connect with others who have similar experiences and backgrounds. The available community groups are **Women in Swift**, **Black in Swift**, and **Pride in Swift**. These are private, moderated support spaces on the Swift Forums.
+为了支持我们 Swift 社区的各类成员，我们为开发者创建了特定的社区群组，让他们能够与具有相似经历和背景的人联系。可用的社区群组有 **Women in Swift**、**Black in Swift** 和 **Pride in Swift**。这些是 Swift 论坛上的私密、受管理的支持空间。
 
-If you’re interested in joining one of these groups, please message [@diversity-workgroup](https://forums.swift.org/new-message?groupname=diversity-workgroup&title=Join+Community+Group&body=1.+Which+community+group(s)+would+you+like+to+join%0D%0A2.+What+support+do+you+hope+to+get+out+of+this+community+group) on the Swift Forums, and briefly answer the following questions:
+如果你有兴趣加入这些群组之一，请在 Swift 论坛上向 [@diversity-workgroup](https://forums.swift.org/new-message?groupname=diversity-workgroup&title=Join+Community+Group&body=1.+Which+community+group(s)+would+you+like+to+join%0D%0A2.+What+support+do+you+hope+to+get+out+of+this+community+group) 发送消息，并简要回答以下问题：
 
-1. Which community group(s) would you like to join?
-2. What support do you hope to get out of this community group?
+1. 你想加入哪个（些）社区群组？
+2. 你希望从这个社区群组获得什么支持？
 
-Identity is a personal matter that should never be questioned by others. As a community, we are trusting individuals to only request to join community groups that represent their identity. If you are not represented by any of the current community groups, you are still welcome and encouraged to participate in Diversity in Swift! You can find other ways to contribute to this effort in the Community Participation section.
+身份是一个个人问题，永远不应该被他人质疑。作为一个社区，我们相信个人只会请求加入代表其身份的社区群组。如果你没有被任何当前的社区群组代表，你仍然受欢迎并被鼓励参与 Swift 多样性！你可以在社区参与部分找到其他贡献这项努力的方式。
 
-## Events
+## 活动
 
-Diversity in Swift will occasionally host virtual events and meetups for networking within the Swift community and the various community groups. You can view and register for upcoming events [here](https://www.eventbrite.com/o/diversity-in-swift-33499837783).
+Swift 多样性偶尔会举办虚拟活动和聚会，用于在 Swift 社区和各个社区群组内进行交流。你可以在[这里](https://www.eventbrite.com/o/diversity-in-swift-33499837783)查看和注册即将举行的活动。
 
+## Swift.org 上的社区焦点博客
 
-## Community-focused blog on Swift.org
+Swift 多样性工作组将在 Swift.org 博客上包含认可和突出我们社区各个开发者所做工作的帖子。Swift 多样性工作组将使用[社区展示](https://forums.swift.org/c/community-showcase)来集思广益这些以社区为焦点的博客文章的想法和主题。请在社区展示中发布任何你认为 Swift 用户会有兴趣了解更多的建议，并简要描述为什么你觉得那项工作有帮助或鼓舞人心。偶尔，Swift 多样性工作组也可能发布参与呼吁，征求关于特定 Swift 主题的建议。
 
-The Diversity in Swift workgroup will include posts on the Swift.org blog that recognize and highlight the work being done by developers across our community. The Diversity in Swift workgroup will use the [Community Showcase](https://forums.swift.org/c/community-showcase) to brainstorm ideas and topics for these community-focused blog posts. Please post any recommendations that you think Swift users would be interested in hearing more about on the Community Showcase, along with a brief description of why you found that work helpful or inspiring. Occasionally, the Diversity in Swift workgroup may also post a Call For Participation to solicit recommendations about a specific Swift topic.
+## 社区参与
 
-## Community Participation
+每个人都欢迎参与 Swift 多样性！以下是一些具体的贡献方式：
 
-Everyone is welcome to participate in Diversity in Swift! Below are a few specific ways to contribute:
+* 加入你认同的社区群组。
+* 提议新的社区群组或项目。
+* 在[社区展示](https://forums.swift.org/c/community-showcase)上分享 Swift 内容。
+* 鼓励参与并突出目前在社区中代表性不足的开发者的工作。
 
-* Joining community groups that you identify with.
-* Proposing new community groups or programs.
-* Sharing Swift content on the [Community Showcase](https://forums.swift.org/c/community-showcase).
-* Encouraging participation and highlighting work from developers who are currently underrepresented in the community.
-
-Anybody can work toward making the Swift community even more approachable. Members of the community can help newcomers overcome barriers by [answering questions on the Swift Forums](/contributing/#answering-questions), improving [open source Swift documentation](https://github.com/swiftlang/swift/blob/main/docs/README.md), searching for or creating [good first issues](/contributing/#good-first-issues), and more.
+任何人都可以努力使 Swift 社区变得更加平易近人。社区成员可以通过[在 Swift 论坛上回答问题](/contributing/#answering-questions)、改进[开源 Swift 文档](https://github.com/swiftlang/swift/blob/main/docs/README.md)、搜索或创建[好的第一个问题](/contributing/#good-first-issues)等方式帮助新人克服障碍。

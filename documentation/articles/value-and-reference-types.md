@@ -1,42 +1,42 @@
 ---
 layout: page
 date: 2023-04-29 12:00:00
-title: Value And Reference Types In Swift
+title: Swift 中的值类型和引用类型
 author: [jamesdempsey]
 ---
 
-Types in Swift are grouped in two categories: _value types_ and _reference types_. Each behave differently and understanding the difference is an important part of understanding Swift.
+Swift 中的类型分为两类：_值类型_和_引用类型_。它们的行为方式不同，理解这种差异是理解 Swift 的重要组成部分。
 
-If you are new to programming or coming to Swift from another language, these concepts may be new to you.
+如果你是编程新手或者从其他语言转到 Swift，这些概念对你来说可能是新的。
 
-Before looking at some code, here are two variations of the same scenario that illustrate the basic differences between how value types and reference types behave.
+在查看代码之前，这里有两个相同场景的变体，说明了值类型和引用类型在行为上的基本差异。
 
-Imagine you are working on a document, maybe a report or a spreadsheet, and you want a friend to take a look at it. There are two common ways you might share this document with your friend:
+想象你正在处理一个文档，可能是一份报告或电子表格，你想让朋友看一下。有两种常见的方式可以与朋友分享这个文档：
 
-1. You could email your friend a copy of the document.
+1. 你可以通过电子邮件给你的朋友发送文档的副本。
 
-2. If the document was in something like Google Docs or Pages for iCloud, you could email your friend a link to the document.
+2. 如果文档在 Google Docs 或 iCloud Pages 中，你可以通过电子邮件给你的朋友发送文档的链接。
 
-In both cases, your friend is able to read and make changes to your document, but there are significant differences.
+在这两种情况下，你的朋友都能够阅读和修改你的文档，但有显著的差异。
 
-When you send your friend a copy, your friend has a completely separate copy of the document. They can edit the document as much as they want, but it doesn’t affect your copy at all.
+当你发送副本给你的朋友时，你的朋友拥有一个完全独立的文档副本。他们可以随意编辑文档，但这不会影响你的副本。
 
-When you send your friend a link, you’re not sending the actual document. You’re sending them a URL that points to the document in the cloud. Since you both have a link to the same document, whatever changes you or your friend make will be seen by both of you.
+当你发送链接给你的朋友时，你并不是发送实际的文档。你是发送一个指向云端文档的 URL。由于你们都有指向同一个文档的链接，你们任何一方做出的更改都会被双方看到。
 
-The difference in behavior between sharing a copy of a document or sharing a link to a shared document is very much like the difference in behavior between value types and reference types.
+分享文档副本或分享共享文档链接的行为差异，非常类似于值类型和引用类型的行为差异。
 
-### Value Types
-In Swift, structures, enumerations, and tuples are all value types. They behave similar to sending your friend a copy of a document.
+### 值类型
+在 Swift 中，结构体、枚举和元组都是值类型。它们的行为类似于给你的朋友发送文档副本。
 
-Assigning a value to a constant or variable, or passing a value into a function or method, always makes a copy of the value.
+将值赋给常量或变量，或将值传递给函数或方法时，总是会创建该值的副本。
 
-In the code below, a `struct` of type `Document` is declared with one property `text`.
+在下面的代码中，声明了一个类型为 `Document` 的 `struct`，带有一个 `text` 属性。
 
-A `Document` instance is created and assigned to myDoc.
+创建了一个 `Document` 实例并赋值给 myDoc。
 
-When `myDoc` is assigned to the variable `friendDoc`, the original instance is copied to a new instance.
+当 `myDoc` 被赋值给变量 `friendDoc` 时，原始实例被复制到一个新实例。
 
-Since it is an independent instance, changing the `text` of `friendDoc` does not affect the `text` of `myDoc`.
+由于它是一个独立的实例，更改 `friendDoc` 的 `text` 不会影响 `myDoc` 的 `text`。
 
 ```swift
 struct Document {
@@ -48,28 +48,28 @@ var friendDoc = myDoc
 
 friendDoc.text = "Blah blah blah"
 
-print(friendDoc.text) // prints "Blah blah blah"
-print(myDoc.text) // prints "Great new article"
+print(friendDoc.text) // 打印 "Blah blah blah"
+print(myDoc.text) // 打印 "Great new article"
 ```
 
-When you send your friend a copy of a document, you are in complete control of when *your* copy changes. You never have to worry about your friend making some unexpected change to your copy of the document.
+当你发送文档副本给你的朋友时，你完全控制*你的*副本何时更改。你永远不用担心你的朋友会对你的文档副本做出意外更改。
 
-Similarly, with a value type, you never have to worry about some other part of your program changing the value.
+类似地，使用值类型时，你永远不用担心程序的其他部分会更改该值。
 
-### Reference Types
-In Swift, classes, actors, and closures are all reference types. They behave similar to sending your friend a link to a shared document.
+### 引用类型
+在 Swift 中，类、actor 和闭包都是引用类型。它们的行为类似于发送朋友共享文档的链接。
 
-Assigning a reference type to a constant or variable, or passing it into a function or method, it is always a reference to a shared instance that is assigned or passed in.
+将引用类型赋给常量或变量，或将其传递给函数或方法时，总是赋值或传递对共享实例的引用。
 
-The code below is identical to the example above with one small but important change. Instead of declaring a `struct` the `Document` type is now declared as a `class`.
+下面的代码与上面的示例相同，只有一个小但重要的变化。现在不是声明 `struct`，而是将 `Document` 类型声明为 `class`。
 
-It is a small code change, but with a significant change in behavior.
+这是一个小的代码更改，但行为有显著变化。
 
-Like before a `Document` instance is created and assigned to `myDoc`.
+像之前一样创建了一个 `Document` 实例并赋值给 `myDoc`。
 
-But now, when `myDoc` is assigned to the variable friendDoc, it is a reference to the instance that is assigned.
+但现在，当 `myDoc` 被赋值给变量 friendDoc 时，赋值的是对该实例的引用。
 
-Since it is a reference to the same instance, changing the `text` of `friendDoc` updates that shared instance including the value of `myDoc`.
+由于它是对同一实例的引用，更改 `friendDoc` 的 `text` 会更新该共享实例，包括 `myDoc` 的值。
 
 ```swift
 class Document {
@@ -81,54 +81,53 @@ var friendDoc = myDoc
 
 friendDoc.text = "Blah blah blah"
 
-print(friendDoc.text) // prints "Blah blah blah"
-print(myDoc.text) // prints "Blah blah blah"
+print(friendDoc.text) // 打印 "Blah blah blah"
+print(myDoc.text) // 打印 "Blah blah blah"
 ```
 
-When you send your friend a link to a shared document, your friend can make changes to the document without you knowing about it. You might be relying on your document staying the same.
+当你发送共享文档的链接给你的朋友时，你的朋友可以在你不知情的情况下更改文档。你可能依赖于你的文档保持不变。
 
-Similarly, with a reference type, any part of your program that has a reference can make a change. Sometimes unexpected changes can lead to bugs.
+类似地，使用引用类型时，程序中拥有引用的任何部分都可以进行更改。有时意外的更改会导致错误。
 
-### Local reasoning
-In the small code example above, you can read through the code line by line and see how the same reference is assigned to two different variables and how changing a property using one variables updates the instance referred to by both variables.
+### 局部推理
+在上面的小代码示例中，你可以逐行阅读代码，看到同一个引用如何被赋给两个不同的变量，以及使用一个变量更改属性如何更新两个变量引用的实例。
 
-Being able to look through code in a single spot and figure out what is going on is called _local reasoning_.
+能够在单个位置查看代码并弄清楚发生了什么，这称为_局部推理_。
 
-Now imagine a larger program where different pieces of the program all have a reference to the same thing. Your code may set a value in place and rely on that value but then somewhere else, an unrelated part of your program could change the value out from under you.
+现在想象一个更大的程序，其中程序的不同部分都有对同一事物的引用。你的代码可能在某个地方设置了一个值并依赖于该值，但在其他地方，程序的不相关部分可能会在你不知情的情况下更改该值。
 
-The formal name for having data that can be changed from multiple places is _shared mutable state_. Shared because it can be accessed from many places in the code, mutable because it can change a.k.a. mutate, and state as a synonym for data, as in ‘the current state of things’.
+从多个地方可以更改的数据的正式名称是_共享可变状态_。共享是因为它可以从代码的许多地方访问，可变因为它可以更改（即变异），状态作为数据的同义词，如"事物的当前状态"。
 
-In this case, you can’t fully understand what is going on in one part of your code without understanding what might be happening at many different places in your code. You lose the ability to do local reasoning, which makes your code harder to understand and harder to debug.
+在这种情况下，你无法完全理解代码的一部分而不了解可能在代码的许多不同位置发生的情况。你失去了局部推理的能力，这使得你的代码更难理解和调试。
 
-One advantage of using value types is that you can be certain no other place in your program can affect the value. You can reason about the code in front of you without needing to know what else is happening elsewhere.
+使用值类型的一个优点是你可以确定程序的其他地方不能影响该值。你可以推理眼前的代码，而不需要知道在其他地方发生了什么。
 
-This makes your code easier to understand and prevents bugs from accidental or unexpected changes to shared mutable state.
+这使得你的代码更容易理解，并防止因意外或意外的共享可变状态更改而导致的错误。
 
-### Choosing Value or Reference Types
-Going back to the example of sharing a document, it can be very useful for both you and your friend to be able to see and edit the same document.
+### 选择值类型或引用类型
+回到分享文档的例子，你和你的朋友能够看到和编辑同一个文档可能非常有用。
 
-Similarly, in a program, sometimes the shared mutable state that reference types provide can be very useful. Reference types aren’t inherently bad, but as described above, they do add additional complexity and possibility for error.
+类似地，在程序中，有时引用类型提供的共享可变状态可能非常有用。引用类型本身并不坏，但如上所述，它们确实增加了额外的复杂性和出错的可能性。
 
-In general, prefer to use structs over classes. If you don’t need the behavior of a reference type, there’s no need to take on the added complexity and pitfalls.
+一般来说，优先使用结构体而不是类。如果你不需要引用类型的行为，就没有必要承担额外的复杂性和陷阱。
 
-The article [Choosing Between Structures and Classes](https://developer.apple.com/documentation/swift/choosing-between-structures-and-classes) describes the tradeoffs in more detail.
+文章[在结构体和类之间选择](https://developer.apple.com/documentation/swift/choosing-between-structures-and-classes)更详细地描述了权衡。
 
+### 组合值类型
+代码中的一个常见设计模式是_组合_，即将较小的元素组合在一起创建较大的元素。
 
-### Composing Value Types
-A common design pattern in code is _composition_ which is combining smaller elements together to create larger elements.
+在 Swift 中，你可以轻松地将值类型组合在一起创建更复杂的值类型。
 
-In Swift, you can easily compose value types together to create more complex value types.
+所以你可以定义一个包含一些基本类型的结构体，如 String、Int、Bool，可能还有一个枚举值。由于结构体中的所有内容都是值类型，该结构体的行为就像一个值类型。
 
-So you could define a struct that contains some basic types like a String, an Int, a Bool, maybe an enumeration value. Since everything in the struct is a value type, the struct behaves like a value type.
+你可能有一个更复杂的结构体，它包含第一个结构体的实例和一些其他值。同样，由于它是由值类型组成的，这个结构体是一个值类型。
 
-You might have a type that is a more complex struct that contains an instance of the first struct and some other values. Again, since it is composed of value types, this struct is a value type.
+### 集合是值类型
+但在 Swift 中，值类型的组合不止于结构体和枚举。
 
-### Collections are Value Types
-But in Swift, composing value types doesn’t stop with structures and enumerations.
+虽然在许多语言中，集合如数组和字典是引用类型，但在 Swift 中，标准集合 `Array`、`Dictionary` 和 `String` 都是值类型。
 
-Although in many languages, collections such as arrays and dictionaries are reference types, in Swift the standard collections `Array`, `Dictionary` and `String` are all value types.
+这意味着结构体可以包含结构体数组，可能还有键值对字典，枚举的集合。只要所有内容都由值类型组成，即使是复杂类型的实例也被视为一个值。
 
-This means a struct can contain an array of structs, maybe a dictionary of key value pairs, a set of enums. As long as everything is composed of value types, an instance of even a complex type is treated as a value.
-
-### Conclusion
-Understanding what value types and reference types are and the differences in how they behave is an important part of learning Swift and being able to reason about your code. The choice between the two often comes down to a choice between declaring a type as a `struct` or a `class`. You can learn more about structures and class in the [Structures and Classes](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/classesandstructures) chapter of *The Swift Programming Language*.
+### 结论
+理解什么是值类型和引用类型以及它们行为方式的差异，是学习 Swift 和能够推理你的代码的重要组成部分。在值类型和引用类型之间的选择通常归结为声明类型为 `struct` 还是 `class` 的选择。你可以在《Swift 编程语言》的[结构体和类](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/classesandstructures)章节中了解更多关于结构体和类的信息。

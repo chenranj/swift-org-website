@@ -1,7 +1,7 @@
-## Adding External Library Dependencies
+## 添加外部库依赖
 
-There may be times where it is appropriate for one of the Swift projects (compiler, Core Libraries, etc.) to make use of libraries that provide functionality on a given platform.  Adding library dependencies impacts the portability of Swift projects, and may involve legal questions as well.
+在某些情况下，Swift 项目（编译器、核心库等）使用提供特定平台功能的库可能是合适的。添加库依赖会影响 Swift 项目的可移植性，也可能涉及法律问题。
 
-As a rule, all new library dependencies must be **explicitly approved** by the [Project lead](/community/#community-structure).
+作为规则，所有新的库依赖必须得到[项目负责人](/community/#community-structure)的**明确批准**。
 
 

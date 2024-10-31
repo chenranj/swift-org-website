@@ -1,13 +1,13 @@
 <a name="evolution-process"></a>
 
-## Swift Evolution
+## Swift 演进
 
-Shaping the future of Swift is a community effort that anyone can participate in via the [Evolution section of the Swift forums][swift-evolution-forums].
-The [Swift evolution process][swift-evolution-process] covers all changes to the Swift language and the public interface of the Swift standard library, including new language features and APIs, changes to existing language features or APIs, removal of existing features, and so on.
+塑造 Swift 的未来是一项社区努力，任何人都可以通过 [Swift 论坛的演进部分][swift-evolution-forums]参与其中。
+[Swift 演进过程][swift-evolution-process]涵盖了对 Swift 语言和 Swift 标准库公共接口的所有更改，包括新的语言特性和 API、对现有语言特性或 API 的更改、移除现有特性等。
 
-See the [Swift evolution review schedule][swift-evolution-reviews]
-for current and upcoming proposal reviews.
+查看 [Swift 演进审查计划][swift-evolution-reviews]
+了解当前和即将进行的提案审查。
 
-[swift-evolution-forums]: /community/#swift-evolution  "Swift Evolution forums"
-[swift-evolution-process]: https://github.com/swiftlang/swift-evolution/blob/main/process.md  "Swift Evolution process"
-[swift-evolution-reviews]: /swift-evolution  "Swift Evolution reviews"
+[swift-evolution-forums]: /community/#swift-evolution  "Swift 演进论坛"
+[swift-evolution-process]: https://github.com/swiftlang/swift-evolution/blob/main/process.md  "Swift 演进过程"
+[swift-evolution-reviews]: /swift-evolution  "Swift 演进审查"

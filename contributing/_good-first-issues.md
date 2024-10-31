@@ -1,23 +1,19 @@
-## Good First Issues
+## 好的第一个问题
 
-Good first issues are bugs, ideas, and tasks that are intended to be accessible
-for contributors that are new to working on the Swift project, and even new to
-the patterns and concepts behind subprojects such as the Swift compiler.
-Good first issues are decorated with a corresponding label and are most easily
-found by visiting `github.com/apple/<repository>/contribute`, e.g.
+好的第一个问题是针对新加入 Swift 项目的贡献者，甚至是新接触 Swift 编译器等子项目的模式和概念的贡献者的错误、想法和任务。
+好的第一个问题带有相应的标签，最容易通过访问 `github.com/apple/<repository>/contribute` 找到，例如
 [github.com/apple/swiftlang/contribute](https://github.com/swiftlang/swift/contribute)
-for the main Swift repository.
-They are expected to be low-priority and of modest scope, and not require
-excessive refactoring, research, or debugging — rather, they should encourage
-newcomers to dip their toes in some part of Swift, learn more about it, and
-make a real contribution.
+用于主要的 Swift 仓库。
+它们应该是低优先级的，范围适中，不需要过多的重构、研究或调试 — 相反，它们应该鼓励
+新人在 Swift 的某个部分试水，了解更多，并
+做出真正的贡献。
 
-Anyone with [commit access](#commit-access) and insight into a particular area
-is welcome and encouraged to pin down or think up good first issues.
+任何具有[提交访问权限](#commit-access)并对特定领域有见解的人
+都欢迎并鼓励确定或思考好的第一个问题。
 
 {% comment %}
-    // TODO: This is content I'd like to migrate into Jira behind a "starter" label of some sort. For now:
+    // TODO: 这是我想迁移到 Jira 中某种"starter"标签后面的内容。目前：
 
-* Swift Intermediate Language (SIL) round-tripping: make sure that the SIL parser can parse what the SIL printer prints. This is a great project for getting a feel for SIL and how it's used, and making it round-trippable has huge benefits for anyone working on the Swift compiler.
-* Warning control: [Clang](http://clang.llvm.org) has a great scheme for placing warnings into specific warning groups, allowing one to control (from the command line) which warnings are emitted by the compiler or are treated as errors. Swift needs that!
+* Swift 中间语言（SIL）往返：确保 SIL 解析器可以解析 SIL 打印器打印的内容。这是一个很好的项目，可以了解 SIL 及其使用方式，使其可往返对任何在 Swift 编译器上工作的人都有巨大的好处。
+* 警告控制：[Clang](http://clang.llvm.org) 有一个很好的方案，可以将警告放入特定的警告组中，允许人们（从命令行）控制编译器发出哪些警告或将哪些警告视为错误。Swift 需要这个！
 {% endcomment %}

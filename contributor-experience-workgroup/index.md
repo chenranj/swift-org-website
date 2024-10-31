@@ -1,39 +1,38 @@
 ---
 layout: page
-title: Contributor Experience Workgroup
+title: 贡献者体验工作组
 ---
 
-The Contributor Experience Workgroup supports contributors to the Swift project, including contributions on the Swift Forums.
+贡献者体验工作组支持 Swift 项目的贡献者，包括在 Swift 论坛上的贡献。
 
-## Charter
+## 章程
 
-The Contributor Experience Workgroup is devoted to:
-- improving the mechanics and ergonomics of contributing to the Swift compiler and related open source repositories by:
-  - providing guidance and setting expectations for the GitHub pull request and issue workflows.
-  - maintaining onboarding documentation.
-  - adding and managing GitHub labels.
-- providing support systems and facilitating collaboration amongst contributors through:
-  - the Swift Mentorship Program.
-  - community groups.
-  - collaboration tools and spaces to connect with other contributors.
+贡献者体验工作组致力于：
+- 通过以下方式改进为 Swift 编译器和相关开源仓库做贡献的机制和人体工程学：
+  - 为 GitHub 拉取请求和问题工作流程提供指导和设定期望。
+  - 维护入职文档。
+  - 添加和管理 GitHub 标签。
+- 通过以下方式提供支持系统并促进贡献者之间的协作：
+  - Swift 导师计划。
+  - 社区群组。
+  - 协作工具和空间，以便与其他贡献者联系。
 
-### Diversity
+### 多样性
 
-Fostering an inclusive community is critical to ensure that everybody in the Swift community feels enabled and empowered to make contributions to the Swift project. The Contributor Experience Workgroup will collaborate with other workgroups to surface pathways for making contributions, lower the barrier to entry for participating in the Swift project, provide diverse opportunities for seasoned contributors to exercise their leadership and expertise, and facilitate participation of the other workgroups in these efforts such as the Swift Mentorship Program.
+培养一个包容的社区对于确保 Swift 社区中的每个人都感到能够并有权为 Swift 项目做出贡献至关重要。贡献者体验工作组将与其他工作组合作，开辟贡献途径，降低参与 Swift 项目的门槛，为经验丰富的贡献者提供发挥其领导力和专业知识的多样机会，并促进其他工作组参与这些努力，如 Swift 导师计划。
 
+## 成员资格
+工作组的成员是致力于改善贡献者体验的志愿者。如果你有兴趣加入工作组，请在 Swift 论坛上向 [@contributor-experience-workgroup](https://forums.swift.org/g/contributor-experience-workgroup) 发送消息，并说明你为什么有兴趣加入以及你如何设想支持 Swift 项目的贡献者！
 
-## Membership
-Members of the workgroup are volunteers working towards improving the contributor experience. If you are interested in joining the workgroup, please send a message to [@contributor-experience-workgroup](https://forums.swift.org/g/contributor-experience-workgroup) on the Swift Forums, and mention why you’re interested in joining and how you envision supporting contributors to the Swift project!
+为了促进工作组内的轮换，将进行年度参与检查，以提供退出工作组的机会，并在 Swift 论坛上宣布新人加入的参与呼吁。
 
-To facilitate turnover within the workgroup, there will be an annual check-in for participation to provide an opportunity to step down from the workgroup, and a Call for Participation for new people to join will be announced on the Swift Forums.
-
-The current members of the workgroup are:
+工作组的当前成员是：
 
 <table>
   <thead>
     <tr>
-      <th>Member</th>
-      <th>Swift forums</th>
+      <th>成员</th>
+      <th>Swift 论坛</th>
       <th>GitHub</th>
     </tr>
   </thead>
@@ -49,7 +48,7 @@ The current members of the workgroup are:
       <td><a href="https://github.com/AnthonyLatsis">@AnthonyLatsis</a></td>
     </tr>
     <tr>
-      <td>Devanshi Modha (Diversity in Swift champion)</td>
+      <td>Devanshi Modha (Swift 多样性倡导者)</td>
       <td><a href="https://forums.swift.org/u/devanshimodha">@devanshimodha</a></td>
       <td><a href="https://github.com/devanshimodha">@devanshimodha</a></td>
     </tr>
@@ -84,7 +83,7 @@ The current members of the workgroup are:
       <td><a href="https://github.com/parispittman">@parispittman</a></td>
     </tr>
     <tr>
-      <td>Pavel Yaskevich (chair)</td>
+      <td>Pavel Yaskevich (主席)</td>
       <td><a href="https://forums.swift.org/u/xedin">@xedin</a></td>
       <td><a href="https://github.com/xedin">@xedin</a></td>
     </tr>
@@ -101,13 +100,12 @@ The current members of the workgroup are:
   </tbody>
 </table>
 
-Members of the workgroup serve at the discretion of the Swift Core Team and the Swift project lead, who has the ultimate authority over the workgroup decisions.
+工作组成员由 Swift 核心团队和 Swift 项目负责人酌情任命，后者对工作组决策拥有最终权力。
 
+## 交流
 
-## Communication
+贡献者体验工作组使用开发论坛与更广泛的 Swift 社区交流，讨论关于贡献者体验的一般问题和疑问。可以通过在 Swift 论坛上向 [@contributor-experience-workgroup](https://forums.swift.org/g/contributor-experience-workgroup) 发送私信来联系工作组。
 
-The Contributor Experience Workgroup communicates with the broader Swift community using the Development forum for general discussions and questions about the contributor experience. The workgroup can be reached privately on the Swift Forums by messaging [@contributor-experience-workgroup](https://forums.swift.org/g/contributor-experience-workgroup).
+## 社区参与
 
-## Community Participation
-
-Every individual contribution is appreciated and is not just limited to submitting pull requests. If you’d like to contribute, consider participating in discussions on the Swift Forums reporting or triaging GitHub issues providing feedback on your own experience contributing to the Swift project volunteering as a mentor for the Swift Mentorship Program.
+我们感谢每一个个人的贡献，这不仅限于提交拉取请求。如果你想做出贡献，可以考虑参与 Swift 论坛上的讨论、报告或分类 GitHub 问题、提供关于你自己为 Swift 项目做贡献的经验的反馈、自愿成为 Swift 导师计划的导师。

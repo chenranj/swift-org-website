@@ -1,98 +1,76 @@
 ---
 layout: page
 date: 2024-05-28 12:00:00
-title: Configuring VS Code for Swift Development
+title: 为 Swift 开发配置 VS Code
 author: [matthewbastien, plemarquand]
 ---
 
-[Visual Studio Code](https://code.visualstudio.com/) (VS Code) is a popular general purpose editor that supports a
-variety of languages through extensibility. The Swift extension brings Swift
-language-specific features to the editor, providing a seamless experience for
-developing Swift applications on all platforms.
+[Visual Studio Code](https://code.visualstudio.com/) (VS Code) 是一个流行的通用编辑器，通过扩展性支持多种语言。Swift 扩展为编辑器带来了 Swift 语言特定的功能，为在所有平台上开发 Swift 应用程序提供了无缝的体验。
 
-The Swift extension includes:
+Swift 扩展包括：
 
-- Syntax highlighting and code completion
-- Code navigation features such as Go to Definition and Find All References
-- Refactoring and quick fixes to code
-- Package management and tasks with support for Swift Package Manager
-- Rich support for debugging
-- Testing with XCTest or Swift Testing frameworks
+- 语法高亮和代码补全
+- 代码导航功能，如转到定义和查找所有引用
+- 代码重构和快速修复
+- 支持 Swift Package Manager 的包管理和任务
+- 丰富的调试支持
+- 使用 XCTest 或 Swift Testing 框架进行测试
 
-The Swift extension is designed to support the following projects:
+Swift 扩展设计用于支持以下项目：
 
-- Swift Package Manager projects (e.g. using a `Package.swift`)
-- Projects that can generate a `compile_commands.json` (e.g. using CMake)
+- Swift Package Manager 项目（例如使用 `Package.swift`）
+- 可以生成 `compile_commands.json` 的项目（例如使用 CMake）
 
-## Install the Extension
+## 安装扩展
 
-1. First, install Swift. If you do not already have Swift installed on your system, see the
-   [Getting Started Guide on Swift.org](/getting-started/).
-2. Download and install [Visual Studio Code](https://code.visualstudio.com/Download).
-3. Install the Swift extension from the
-   [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=sswg.swift-lang)
-   or directly from within the VS Code extensions pane.
+1. 首先，安装 Swift。如果您的系统上还没有安装 Swift，请参阅 [Swift.org 上的入门指南](/getting-started/)。
+2. 下载并安装 [Visual Studio Code](https://code.visualstudio.com/Download)。
+3. 从 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=sswg.swift-lang) 安装 Swift 扩展，或直接在 VS Code 扩展面板中安装。
 
-![Installing the vscode-swift extension from the extensions pane](/assets/images/getting-started-with-vscode-swift/installation.png)
+![从扩展面板安装 vscode-swift 扩展](/assets/images/getting-started-with-vscode-swift/installation.png)
 
-## Creating a new Swift project
+## 创建新的 Swift 项目
 
-To create a new Swift project, you can use the `Swift: Create New Project...` command in
-the Swift extension to guide you through the process. You can find this command by opening
-the Command Palette and following the instructions below.
+要创建新的 Swift 项目，您可以使用 Swift 扩展中的 `Swift: Create New Project...` 命令来引导您完成这个过程。您可以通过打开命令面板并按照以下说明找到此命令。
 
-- For macOS: `CMD + Shift + P`
-- Other platforms: `Ctrl + Shift + P`
+- macOS：`CMD + Shift + P`
+- 其他平台：`Ctrl + Shift + P`
 
-![Create New Project command showing available project templates](/assets/images/getting-started-with-vscode-swift/create-new-project/select-project-template.png)
+![创建新项目命令显示可用的项目模板](/assets/images/getting-started-with-vscode-swift/create-new-project/select-project-template.png)
 
-1. Choose the type of project you'd like to create from the list of templates.
-2. Choose the directory where the project will be stored.
-3. Give your project a name.
-4. Open the newly created project. You will be prompted to open the project in
-   the current window, a new window, or add it to the current workspace. The
-   default behaviour can be configured by using the
-   `swift.openAfterCreateNewProject` setting.
+1. 从模板列表中选择您想要创建的项目类型。
+2. 选择存储项目的目录。
+3. 为您的项目命名。
+4. 打开新创建的项目。系统会提示您在当前窗口中打开项目、在新窗口中打开项目，或将其添加到当前工作区。默认行为可以通过使用 `swift.openAfterCreateNewProject` 设置进行配置。
 
-## Language Features
+## 语言功能
 
-The Swift extension uses [SourceKit-LSP](https://github.com/swiftlang/sourcekit-lsp)
-to power language features. SourceKit-LSP provides the following features in the
-editor. Use these links to see the VS Code documentation for each topic:
+Swift 扩展使用 [SourceKit-LSP](https://github.com/swiftlang/sourcekit-lsp) 来提供语言功能。SourceKit-LSP 在编辑器中提供以下功能。使用这些链接查看每个主题的 VS Code 文档：
 
-- [Code completion](https://code.visualstudio.com/docs/editor/intellisense)
-- [Go to definition](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition)
-- [Find all references](https://code.visualstudio.com/Docs/editor/editingevolved#_peek)
-- [Rename refactoring](https://code.visualstudio.com/docs/editor/refactoring#_rename-symbol)
-- [Diagnostics](https://code.visualstudio.com/docs/editor/editingevolved#_errors-warnings)
-- [Quick Fixes](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)
+- [代码补全](https://code.visualstudio.com/docs/editor/intellisense)
+- [转到定义](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition)
+- [查找所有引用](https://code.visualstudio.com/Docs/editor/editingevolved#_peek)
+- [重命名重构](https://code.visualstudio.com/docs/editor/refactoring#_rename-symbol)
+- [诊断](https://code.visualstudio.com/docs/editor/editingevolved#_errors-warnings)
+- [快速修复](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)
 
-SourceKit-LSP also provides code actions to automate common tasks. Code actions in VS Code
-appear as a light bulb near the editor margin (see the below screenshot for an
-example of this). Clicking on the light bulb will show you the available actions
-which can include:
+SourceKit-LSP 还提供代码操作来自动化常见任务。VS Code 中的代码操作以灯泡的形式出现在编辑器边缘附近（参见下面的截图示例）。点击灯泡将显示可用的操作，其中可能包括：
 
-- Adding targets to your `Package.swift`
-- Converting JSON to protocols
-- Adding documentation to your functions
+- 向您的 `Package.swift` 添加目标
+- 将 JSON 转换为协议
+- 为您的函数添加文档
 
-![Package swift actions](/assets/images/getting-started-with-vscode-swift/language-features/package_actions.png)
+![Package swift 操作](/assets/images/getting-started-with-vscode-swift/language-features/package_actions.png)
 
 <div class="warning" markdown="1">
-Before language features can be used you must perform a `swift build` command on your
-project either on the command line or using a task in VS Code. This populates the index in SourceKit-LSP.
+在使用语言功能之前，您必须在项目上执行 `swift build` 命令，可以在命令行或使用 VS Code 中的任务来执行。这会填充 SourceKit-LSP 中的索引。
 </div>
 
-## Swift Tasks
+## Swift 任务
 
-Visual Studio Code provides tasks as a way to run external tools. See the
-[Integrate with External Tools via Tasks](https://code.visualstudio.com/docs/editor/tasks)
-documentation to learn more.
+Visual Studio Code 提供任务作为运行外部工具的方式。请参阅 [通过任务与外部工具集成](https://code.visualstudio.com/docs/editor/tasks) 文档了解更多信息。
 
-The Swift extension provides some built-in tasks that you can use to build your project via
-the Swift Package Manager. You can also configure custom tasks by creating a
-`tasks.json` file in the root folder of your project. For example, this
-`tasks.json` builds of your Swift targets in release mode:
+Swift 扩展提供了一些内置任务，您可以使用这些任务通过 Swift Package Manager 构建您的项目。您还可以通过在项目根文件夹中创建 `tasks.json` 文件来配置自定义任务。例如，这个 `tasks.json` 以发布模式构建您的 Swift 目标：
 
 ```json
 {
@@ -111,40 +89,26 @@ the Swift Package Manager. You can also configure custom tasks by creating a
 }
 ```
 
-The above task is configured to be in the `build` group. This means it will
-appear in the `run build tasks` menu that can be opened with `CMD + Shift + B`
-on macOS or `Ctrl + Shift + B` on other platforms:
+上述任务被配置为属于 `build` 组。这意味着它将出现在 `run build tasks` 菜单中，该菜单可以在 macOS 上使用 `CMD + Shift + B` 或在其他平台上使用 `Ctrl + Shift + B` 打开：
 
-![Run build task menu](/assets/images/getting-started-with-vscode-swift/tasks/build-tasks.png)
+![运行构建任务菜单](/assets/images/getting-started-with-vscode-swift/tasks/build-tasks.png)
 
-Any errors that occur during a build appear in the editor as diagnostics
-alongside those provided by SourceKit-LSP. Running another build task clears the
-diagnostics from the previous build task.
+在构建期间发生的任何错误都会作为诊断出现在编辑器中，与 SourceKit-LSP 提供的诊断一起显示。运行另一个构建任务会清除上一个构建任务的诊断。
 
-## Debugging
+## 调试
 
-Visual Studio Code provides a rich debugging experience. See the
-[Debugging](https://code.visualstudio.com/docs/editor/debugging) documentation for
-more information.
+Visual Studio Code 提供丰富的调试体验。有关更多信息，请参阅 [调试](https://code.visualstudio.com/docs/editor/debugging) 文档。
 
-The Swift extension relies on the
-[Code-LLDB extension](https://github.com/vadimcn/vscode-lldb) to enable
-debugging support.
+Swift 扩展依赖 [Code-LLDB 扩展](https://github.com/vadimcn/vscode-lldb) 来启用调试支持。
 
 <div class="warning" markdown="1">
-The Swift extension will prompt you to configure settings for LLDB the first
-time you launch VS Code. You will need to either apply the configuration
-globally (user settings) or to your workspace (workspace settings) for the
-debugger to work properly.
+首次启动 VS Code 时，Swift 扩展会提示您配置 LLDB 的设置。您需要将配置应用到全局（用户设置）或您的工作区（工作区设置）中，调试器才能正常工作。
 
-![Configure the Debugger](/assets/images/getting-started-with-vscode-swift/debugging/configure-lldb.png)
+![配置调试器](/assets/images/getting-started-with-vscode-swift/debugging/configure-lldb.png)
 
 </div>
 
-By default, the extension creates a launch configuration for each executable
-target in your Swift package. You may configure these yourself by adding a
-`launch.json` file to the root folder of your project. For example, this
-`launch.json` launches a Swift executable with custom arguments:
+默认情况下，扩展会为 Swift 包中的每个可执行目标创建一个启动配置。您可以通过在项目根文件夹中添加 `launch.json` 文件来自行配置这些设置。例如，这个 `launch.json` 使用自定义参数启动 Swift 可执行文件：
 
 ```json
 {
@@ -163,86 +127,63 @@ target in your Swift package. You may configure these yourself by adding a
 }
 ```
 
-You can launch a debugging session via the Debug view in VS Code.
+您可以通过 VS Code 中的调试视图启动调试会话。
 
-1. Select the launch configuration you wish to debug.
-2. Click on the green play button to launch a debugging session.
+1. 选择您想要调试的启动配置。
+2. 点击绿色播放按钮启动调试会话。
 
-The executable will be launched and you can set breakpoints in
-your Swift code that will be hit as code executes.
+可执行文件将被启动，您可以在 Swift 代码中设置断点，这些断点将在代码执行时被命中。
 
-The screenshot below shows an example of debugging a Hello World program. It
-is paused on a breakpoint and you can see that the Debug View shows the values
-of variables in scope. You can also hover over identifiers in the editor to see
-their variable values:
+下面的截图显示了调试 Hello World 程序的示例。它在断点处暂停，您可以看到调试视图显示了作用域中变量的值。您还可以将鼠标悬停在编辑器中的标识符上以查看其变量值：
 
-![Debugging](/assets/images/getting-started-with-vscode-swift/debugging/debugging.png)
+![调试](/assets/images/getting-started-with-vscode-swift/debugging/debugging.png)
 
-## Test Explorer
+## 测试资源管理器
 
-Visual Studio Code provides a Test Explorer view in the left sidebar which can
-be used:
+Visual Studio Code 在左侧边栏提供了一个测试资源管理器视图，可用于：
 
-- To navigate to tests
-- To run tests
-- To Debug tests
+- 导航到测试
+- 运行测试
+- 调试测试
 
-The Swift extension supports [XCTest](https://developer.apple.com/documentation/xctest) as well as
-[Swift Testing](https://swiftpackageindex.com/apple/swift-testing/main/documentation/testing).
-As you write tests they are automatically added to the Test Explorer.
+Swift 扩展支持 [XCTest](https://developer.apple.com/documentation/xctest) 以及 [Swift Testing](https://swiftpackageindex.com/apple/swift-testing/main/documentation/testing)。当您编写测试时，它们会自动添加到测试资源管理器中。
 
-![Inline test errors](/assets/images/getting-started-with-vscode-swift/testing/inline_assertion_failures.png)
+![内联测试错误](/assets/images/getting-started-with-vscode-swift/testing/inline_assertion_failures.png)
 
-To debug a test:
+要调试测试：
 
-1. Set a breakpoint
-2. Run the test, suite, or entire test target with the `Debug Test` profile.
+1. 设置断点
+2. 使用 `Debug Test` 配置文件运行测试、测试套件或整个测试目标。
 
-The `Run Test with Coverage` profile instruments the code under test and opens a
-code coverage report when the test run completes. As you browse covered files,
-line numbers that were executed during a test appear green, and those that were
-missed appear red. Hovering over a line number shows how many times covered
-lines were executed. Line execution counts can be shown or hidden using the
-`Test: Show Inline Coverage` command.
+`Run Test with Coverage` 配置文件会检测被测试的代码，并在测试运行完成时打开代码覆盖率报告。当您浏览已覆盖的文件时，在测试期间执行的行号显示为绿色，而未执行的行号显示为红色。将鼠标悬停在行号上会显示已覆盖行被执行的次数。可以使用 `Test: Show Inline Coverage` 命令显示或隐藏行执行计数。
 
-Swift Testing tests annotated with
-[tags](https://swiftpackageindex.com/apple/swift-testing/main/documentation/testing/addingtags)
-can be filtered in the Test Explorer using `@TestTarget:tagName`. You can then
-run or debug the filtered list of tests.
+带有 [标签](https://swiftpackageindex.com/apple/swift-testing/main/documentation/testing/addingtags) 的 Swift Testing 测试可以在测试资源管理器中使用 `@TestTarget:tagName` 进行过滤。然后您可以运行或调试过滤后的测试列表。
 
 <div class="warning" markdown="1">
-The Swift extension does not support running Swift Testing tests in Swift 5.10 or earlier.
+Swift 扩展不支持在 Swift 5.10 或更早版本中运行 Swift Testing 测试。
 </div>
 
-## Advanced Toolchain Selection
+## 高级工具链选择
 
-The Swift extension automatically detects your installed Swift toolchain.
-However, it also provides a command called `Swift: Select Toolchain...` which
-can be used to select between toolchains if you have multiple installed.
+Swift 扩展会自动检测您安装的 Swift 工具链。但是，它还提供了一个名为 `Swift: Select Toolchain...` 的命令，如果您安装了多个工具链，可以用它来在工具链之间进行选择。
 
 <div class="warning" markdown="1">
-This is an advanced feature used to configure VS Code with a toolchain other
-than the default on your machine. It is recommended to use `xcode-select` on
-macOS or `swiftly` on Linux to switch between toolchains globally.
+这是一个高级功能，用于将 VS Code 配置为使用机器上默认工具链以外的工具链。建议在 macOS 上使用 `xcode-select` 或在 Linux 上使用 `swiftly` 来全局切换工具链。
 </div>
 
-You may be prompted to select where to configure this new path. Your options are
-to:
+系统可能会提示您选择在哪里配置这个新路径。您的选项是：
 
-- Save it in User Settings
-- Save it in Workspace Settings
+- 保存在用户设置中
+- 保存在工作区设置中
 
-Keep in mind that Workspace Settings take precedence over User Settings:
+请记住，工作区设置优先于用户设置：
 
-![Settings selection](/assets/images/getting-started-with-vscode-swift/toolchain-selection/configuration.png)
+![设置选择](/assets/images/getting-started-with-vscode-swift/toolchain-selection/configuration.png)
 
-The Swift extension will then prompt you to reload the extension in order to
-pick up the new toolchain. You must do so, otherwise the extension will not
-function correctly:
+然后 Swift 扩展会提示您重新加载扩展以使用新的工具链。您必须这样做，否则扩展将无法正常工作：
 
-![Reload VS Code warning](/assets/images/getting-started-with-vscode-swift/toolchain-selection/reload.png)
+![重新加载 VS Code 警告](/assets/images/getting-started-with-vscode-swift/toolchain-selection/reload.png)
 
-## Contributors
+## 贡献者
 
-The extension is developed by members of the Swift Community and maintained by
-the [Swift Server Working Group](/sswg/).
+该扩展由 Swift 社区成员开发，并由 [Swift 服务器工作组](/sswg/) 维护。

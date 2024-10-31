@@ -1,9 +1,8 @@
-## Answering Questions
+## 回答问题
 
-One of the most important and immediate ways you can support the community
-is to answer questions on the
-[forums](/community/#forums).
-Whether you're helping a newcomer understand a language feature
-or troubleshooting an edge case with a seasoned developer,
-your knowledge and experience of Swift
-can go a long way to help others.
+支持社区最重要和最直接的方式之一
+是在[论坛](/community/#forums)上回答问题。
+无论你是在帮助新手理解语言特性，
+还是与经验丰富的开发者一起排查边缘情况，
+你对 Swift 的知识和经验
+都可以极大地帮助他人。
