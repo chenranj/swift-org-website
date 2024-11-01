@@ -1140,6 +1140,7 @@ function updateProposalsCount (count) {
   // Calculate and set value of flag filter description span
   var flagFilterDescription = document.querySelector('#flag-filter-description')
   if (upcomingFeatureFlagFilterEnabled) {
+    var anchorTag = ''
     var uffText = '即将推出的功能标记' + (count !== 1 ? '' : '')
     flagFilterDescription.innerHTML = "在"+ (count !== 1 ? '' : '') + anchorTag + uffText + '</a>'
   } else {
