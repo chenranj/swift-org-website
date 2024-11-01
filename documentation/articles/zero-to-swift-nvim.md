@@ -1,73 +1,59 @@
 ---
 layout: page
 date: 2024-06-04 15:13:07
-title: Configuring Neovim for Swift Development
+title: 为 Swift 开发配置 Neovim
 author: [etcwilde]
 ---
 
-[Neovim](https://neovim.io) is a modern reimplementation of _Vim_, a popular terminal-based text
-editor.
-Neovim adds new features like asynchronous operations and powerful Lua bindings
-for a snappy editing experience, in addition to the improvements _Vim_ brings to
-the original _Vi_ editor.
+[Neovim](https://neovim.io) 是一个流行的终端文本编辑器 _Vim_ 的现代重新实现。
+Neovim 除了 _Vim_ 对原始 _Vi_ 编辑器的改进外，还添加了异步操作和强大的 Lua 绑定等新特性，
+提供了流畅的编辑体验。
 
-This article walks you through configuring Neovim for Swift development,
-providing configurations for various plugins to build a working Swift editing
-experience.
-The configuration files are built up step by step and the end of the article contains the
-fully assembled versions of those files.
-It is not a tutorial on how to use Neovim and assumes some familiarity
-with modal text editors like _Neovim_, _Vim_, or _Vi_.
-We are also assuming that you have already installed a Swift toolchain on your
-computer. If not, please see the
-[Swift installation instructions](https://www.swift.org/install).
+本文将指导你为 Swift 开发配置 Neovim，为各种插件提供配置，以构建一个可用的 Swift 编辑环境。
+配置文件将逐步构建，文章末尾包含这些文件的完整组装版本。
+这不是一个如何使用 Neovim 的教程，假设你已经熟悉像 _Neovim_、_Vim_ 或 _Vi_ 这样的模态文本编辑器。
+我们还假设你已经在计算机上安装了 Swift 工具链。如果没有，请参阅
+[Swift 安装说明](https://www.swift.org/install)。
 
-Although the article references Ubuntu 22.04, the configuration itself works on
-any operating system where a recent version of Neovim and a Swift toolchain is
-available.
+虽然本文引用了 Ubuntu 22.04，但配置本身适用于任何安装了较新版本 Neovim 和 Swift 工具链的
+操作系统。
 
-Basic setup and configuration includes:
+基本设置和配置包括：
 
-1. Installing Neovim.
-2. Installing `lazy.nvim` to manage our plugins.
-3. Configuring the SourceKit-LSP server.
-4. Setting up Language-Server-driven code completion with _nvim-cmp_.
-5. Setting up snippets with _LuaSnip_.
+1. 安装 Neovim
+2. 安装 `lazy.nvim` 来管理插件
+3. 配置 SourceKit-LSP 服务器
+4. 使用 _nvim-cmp_ 设置基于语言服务器的代码补全
+5. 使用 _LuaSnip_ 设置代码片段
 
-The following sections are provided to help guide you through the setup:
+以下部分将帮助指导你完成设置：
 
-- [Prerequisites](#prerequisites)
-- [Package Management](#packaging-with-lazy)
-- [Language Server Support](#language-server-support)
-    - [File Updates](#file-updating)
-- [Code Completion](#code-completion)
-- [Snippets](#Snippets)
-- [Fully Assembled Configuration Files](#files)
+- [前提条件](#prerequisites)
+- [包管理](#packaging-with-lazy)
+- [语言服务器支持](#language-server-support)
+    - [文件更新](#file-updating)
+- [代码补全](#code-completion)
+- [代码片段](#Snippets)
+- [完整配置文件](#files)
 
-> Tip: If you already have Neovim, Swift, and a package manager installed, you can skip to setting up [Language Server support](#language-server-support).
+> 提示：如果你已经安装了 Neovim、Swift 和包管理器，可以直接跳到[语言服务器支持](#language-server-support)部分。
 
-> Note: If you are bypassing the [Prerequisites](#prerequisites) section, make sure your
-copy of Neovim is version v0.9.4 or higher, or you may experience issues with some
-of the Language Server Protocol (LSP) Lua APIs.
+> 注意：如果你跳过了[前提条件](#prerequisites)部分，请确保你的
+Neovim 版本是 v0.9.4 或更高，否则可能在使用一些语言服务器协议(LSP) Lua API 时遇到问题。
 
-## Prerequisites
+## 前提条件
 
-To get started, you'll need to install Neovim. The Lua
-APIs exposed by Neovim are under rapid development. We will want to take
-advantage of the recent improvements in the integrated support for Language
-Server Protocol (LSP), so we will need a fairly recent version
-of Neovim.
+首先，你需要安装 Neovim。Neovim 暴露的 Lua API 正在快速发展。我们想要利用语言服务器协议(LSP)
+集成支持的最新改进，所以我们需要一个相当新的 Neovim 版本。
 
-I'm running Ubuntu 22.04 on an `x86_64` machine. Unfortunately, the
-version of Neovim shipped in the Ubuntu 22.04 `apt` repository is too old to
-support many of the APIs that we will be using.
+我使用的是 x86_64 架构的 Ubuntu 22.04。不幸的是，Ubuntu 22.04 的 `apt` 仓库中的
+Neovim 版本太旧，不支持我们将要使用的许多 API。
 
-For this install, I used `snap` to install Neovim v0.9.4.
-Ubuntu 24.04 has a new enough version of Neovim, so a normal
-`apt install neovim` invocation will work.
-For installing Neovim on other operating systems and Linux distributions,
-please see the
-[Neovim install page](https://github.com/neovim/neovim/blob/master/INSTALL.md).
+对于这次安装，我使用 `snap` 来安装 Neovim v0.9.4。
+Ubuntu 24.04 有足够新的 Neovim 版本，所以普通的
+`apt install neovim` 命令就可以工作。
+关于在其他操作系统和 Linux 发行版上安装 Neovim，
+请参阅 [Neovim 安装页面](https://github.com/neovim/neovim/blob/master/INSTALL.md)。
 
 ```console
  $  sudo snap install nvim --classic
@@ -83,38 +69,33 @@ Compilation: /usr/bin/cc -O2 -g -Og -g -Wall -Wextra -pedantic -Wno-unused-pa...
 Run :checkhealth for more info
 ```
 
-## Getting Started
+## 入门
 
-We have working copies of Neovim and Swift on our path. While we can start with
-a `vimrc` file, Neovim is transitioning from using vimscript to Lua. Lua
-is easier to find documentation for since it's an actual programming language,
-tends to run faster, and pulls your configuration out of the main runloop so
-your editor stays nice and snappy.
-You can still use a `vimrc` with vimscript, but we'll use Lua.
+我们的路径中已经有了可用的 Neovim 和 Swift。虽然我们可以从 `vimrc` 文件开始，但 Neovim 正在
+从使用 vimscript 过渡到 Lua。Lua 更容易找到文档因为它是一个真正的编程语言，
+运行速度更快，并且将配置从主运行循环中抽离出来，使编辑器保持流畅。
+你仍然可以使用带有 vimscript 的 `vimrc`，但我们将使用 Lua。
 
-The main Neovim configuration file goes in `~/.config/nvim`. The other Lua files
-go in `~/.config/nvim/lua`. Go ahead and create an `init.lua` now;
+主要的 Neovim 配置文件放在 `~/.config/nvim` 中。其他 Lua 文件
+放在 `~/.config/nvim/lua` 中。现在创建一个 `init.lua`：
 
 ```console
  $  mkdir -p ~/.config/nvim/lua && cd ~/.config/nvim
  $  nvim init.lua
 ```
 
-> Note: The examples below contain a GitHub link to the plugin to help you readily access the documentation. You can also explore the plugin itself.
+> 注意：下面的示例包含插件的 GitHub 链接，以帮助你快速访问文档。你也可以直接探索插件本身。
 
-## Packaging with _lazy.nvim_
+## 使用 _lazy.nvim_ 进行包管理
 
-While it's possible to set everything up manually, using a package manager helps
-keep your packages up-to-date, and ensures that everything is installed
-correctly when copy your configuration to a new computer. Neovim also has a
-built-in plugin manager, but I have found
-[_lazy.nvim_](https://github.com/folke/lazy.nvim) to work well.
+虽然可以手动设置所有内容，但使用包管理器可以帮助
+保持包的更新，并确保当你将配置复制到新计算机时所有内容都正确安装。Neovim 也有一个
+内置插件管理器，但我发 [_lazy.nvim_](https://github.com/folke/lazy.nvim) 工作得很好。
 
-We will start with a little bootstrapping script to install _lazy.nvim_ if it
-isn't installed already, add it to our runtime path, and finally configure our
-packages.
+我们将从一个小的引导脚本开始，如果 _lazy.nvim_ 还没有安装，就安装它，
+将它添加到运行时路径中，最后配置我们的包。
 
-At the top of your `init.lua` write:
+在你的 `init.lua` 顶部写入：
 ```lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -130,60 +111,56 @@ end
 vim.opt.rtp:prepend(lazypath)
 ```
 
-This snippet clones _lazy.nvim_ if it doesn't already exist, and then adds it to the
-runtime path. Now we initialize _lazy.nvim_ and tell it where to look for the plugin
-specs.
+这段代码如果 _lazy.nvim_ 不存在就克隆它，然后将它添加到运行时路径中。现在我们初始化 _lazy.nvim_ 并告诉它在哪里查找插件
+规格。
 
 ```lua
 require("lazy").setup("plugins")
 ```
 
-This configures _lazy.nvim_ to look in a `plugins/` directory under our `lua/`
-directory for each plugin. We'll also want a place to put our own non-plugin
-related configurations, so we'll stick it in `config/`. Go ahead and create
-those directories now.
+这配置 _lazy.nvim_ 在我们的 `lua/` 目录下的 `plugins/` 目录中查找每个插件。我们还需要一个地方来放置我们自己的非插件
+相关配置，所以我们将它放在 `config/` 中。现在创建这些目录。
 
 ```console
  $  mkdir lua/plugins lua/config
 ```
 
-See [lazy.nvim Configuration](https://github.com/folke/lazy.nvim?tab=readme-ov-file#%EF%B8%8F-configuration) for details on configuring _lazy.nvim_.
+有关配置 _lazy.nvim_ 的详细信息，请参阅 [lazy.nvim 配置](https://github.com/folke/lazy.nvim?tab=readme-ov-file#%EF%B8%8F-configuration)。
 
 ![_lazy.nvim_ package manger](/assets/images/zero-to-swift-nvim/Lazy.png)
 
-Note that your configuration won't look exactly like this.
-We have only installed _lazy.nvim_, so that is the only plugin that is listed on
-your configuration at the moment.
-That's not very exciting to look at, so I've added a few additional plugins to
-make it look more appealing.
+请注意，您的配置不会与此完全相同。
+我们只安装了_lazy.nvim_，因此它是目前唯一在配置中列出的插件。
+配置中列出的唯一插件。
+这看起来并不令人兴奋，所以我添加了一些额外的插件，使其看起来更吸引人。
+让它看起来更吸引人。
 
-To check that it's working:
- - Launch Neovim.
+检查是否正常工作
+- 启动 Neovim。
 
-   You should first see an error saying that there were no specs found for
-   module plugins. This just means that there aren't any plugins.
+   你首先会看到一个错误，提示没有为模块插件的规格。这只是表示没有任何插件。
 
- - Press Enter and type, `:Lazy`.
+ - 按 Enter 键并输入 `:Lazy`。
 
-   _lazy.nvim_ lists the plugins installed. There should only be one right now:
-   "lazy.nvim". This is _lazy.nvim_ tracking and updating itself.
+   _lazy.nvim_会列出已安装的插件。现在应该只有一个：
+   “lazy.nvim"。这是_lazy.nvim_在跟踪和更新自己。
 
- - We can manage our plugins through the _lazy.nvim_ menu.
-    - Pressing `I` will install new plugins.
-    - Pressing `U` will update installed plugins.
-    - Pressing `X` will delete any plugins that _lazy.nvim_ installed, but are
-      no longer tracked in your configuration.
+ - 我们可以通过_lazy.nvim_菜单管理我们的插件。
+    - 按 `I` 键将安装新插件。
+    - 按下 `U` 会更新已安装的插件。
+    - 按下 `X` 会删除_lazy.nvim_安装的任何插件，但在配置中不再被跟踪。
+      在配置中不再被跟踪的插件。
 
-## Language Server Support
+## 语言服务器支持
 
-Language servers respond to editor requests providing language-specific support.
-Neovim has support for Language Server Protocol (LSP) built-in, so you don't
-need an external package for LSP, but adding a configuration for each LSP server
-manually is a lot of work. Neovim has a package for configuring LSP servers,
-[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig).
+语言服务器会响应编辑器的请求，提供特定语言的支持。
+Neovim 内置了对语言服务器协议（LSP）的支持，因此你不需要为 LSP
+但手动为每个 LSP 服务器添加配置是一项繁重的工作。
+但手动为每个 LSP 服务器添加配置是一项繁重的工作。Neovim 有一个配置 LSP 服务器的软件包、
+[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)。
 
-Go ahead and create a new file under `lua/plugins/lsp.lua`. In it, we'll start
-by adding the following snippet.
+请在 `lua/plugins/lsp.lua` 下创建一个新文件。在该文件中，我们将首先
+添加以下代码段。
 
 ```lua
 return {
@@ -220,26 +197,21 @@ config = function()
 end,
 ```
 
-![LSP powered live error messages](/assets/images/zero-to-swift-nvim/LSP-Error.png)
+![LSP 驱动的实时错误息](/assets/images/zero-to-swift-nvim/LSP-Error.png)
 
-I've created a little example Swift package that computes [Fibonacci
-numbers](https://oeis.org/A000045) asynchronously.
-Pressing `shift` + `k` on one of the references to the `fibonacci` function
-shows the documentation for that function, along with the function signature.
-The LSP integration is also showing that we have an error in the code.
+我创建了一个小的 Swift 包示例，用于异步计算[斐波那契数列](https://oeis.org/A000045)。
+在 `fibonacci` 函数的任何引用上按 `shift` + `k` 
+会显示该函数的文档，以及函数签名。
+LSP 集成还显示我们的代码中有一个错误。
 
-### File Updating
+### 文件更新
 
-SourceKit-LSP increasingly relies on the editor informing the server when
-certain files change. This need is communicated through _dynamic registration_.
-You don't have to understand what that means, but Neovim doesn't implement
-dynamic registration. You'll notice this when you update your package manifest,
-or add new files to your `compile_commands.json` file and LSP doesn't work without
-restarting Neovim.
+SourceKit-LSP 越来越依赖编辑器通知服务器某些文件发生变化。这种需求通过 _动态注册_ 来传达。
+你不需要理解这是什么意思，但 Neovim 不实现动态注册。当你更新包清单时，
+或者向 `compile_commands.json` 文件添加新文件时，你会注意到这一点，LSP 在不重启 Neovim 的情况下无法工作。
 
-Instead, we know that SourceKit-LSP needs this functionality, so we'll enable it
-statically. We'll update our `sourcekit` setup configuration to manually set the
-`didChangeWatchedFiles` capability.
+相反，我们知道 SourceKit-LSP 需要这个功能，所以我们将静态启用它。我们将更新我们的 `sourcekit` 设置配置，
+手动设置 `didChangeWatchedFiles` 功能。
 
 ```lua
 lspconfig.sourcekit.setup {
@@ -253,18 +225,16 @@ lspconfig.sourcekit.setup {
 }
 ```
 
-If you're interested in reading more about this issue, the conversations in the
-following issues describe the issue in more detail:
- - [LSP: Implement dynamicRegistration](https://github.com/neovim/neovim/issues/13634)
- - [add documentFormattingProvider to server capabilities response](https://github.com/microsoft/vscode-eslint/pull/1307)
+如果你有兴趣了解更多关于这个问题的信息，以下问题中的讨论更详细地描述了这个问题：
+ - [LSP: 实现动态注册](https://github.com/neovim/neovim/issues/13634)
+ - [向服务器功能响应添加 documentFormattingProvider](https://github.com/microsoft/vscode-eslint/pull/1307)
 
-## Code Completion
+## 代码补全
 
-![LSP-driven autocomplete completing the Foundation module](/assets/images/zero-to-swift-nvim/LSP-Autocomplete.png)
+![LSP 驱动的自动补全完成 Foundation 模块](/assets/images/zero-to-swift-nvim/LSP-Autocomplete.png)
 
-We will use [_nvim-cmp_](https://github.com/hrsh7th/nvim-cmp) to act as the code completion mechanism.
-We'll start by telling _lazy.nvim_ to download the package and to load it lazily when we enter insert
-mode since you don't need code completion if you're not editing the file.
+我们将使用 [_nvim-cmp_](https://github.com/hrsh7th/nvim-cmp) 作为代码补全机制。
+我们将首先告诉 _lazy.nvim_ 下载该包，并在我们进入插入模式时懒加载它，因为如果你不编辑文件就不需要代码补全。
 
 ```lua
 -- lua/plugins/codecompletion.lua
@@ -277,15 +247,13 @@ return {
 }
 ```
 
-Next, we'll configure some completion sources to provide code completion results.
-_nvim-cmp_ doesn't come with completion sources, those are additional plugins.
-For this configuration, I want results based on LSP, filepath completion, and
-the text in my current buffer. For more, the _nvim-cmp_ Wiki has a [list of
-sources](https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources).
+接下来，我们将配置一些补全源以提供代码补全结果。
+_nvim-cmp_ 不附带补全源，这些是额外的插件。
+对于此配置，我希望基于 LSP、文件路径补全和
+当前缓冲区中的文本提供结果。更多信息请参阅 _nvim-cmp_ Wiki 上的[源列表](https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources)。
 
-To start, we will tell _lazy.nvim_ about the new plugins and that _nvim-cmp_ depends
-on them.
-This ensures that _lazy.nvim_ will initialize each of them when _nvim-cmp_ is loaded.
+首先，我们将告诉 _lazy.nvim_ 关于新插件，并且 _nvim-cmp_ 依赖于它们。
+这确保了 _lazy.nvim_ 在加载 _nvim-cmp_ 时会初始化它们。
 
 ```lua
 -- lua/plugins/codecompletion.lua
@@ -306,13 +274,10 @@ return {
 }
 ```
 
-Now we need to configure _nvim-cmp_ to take advantage of the code completion
-sources.
-Unlike many other plugins, _nvim-cmp_ hides many of its inner-workings, so
-configuring it is a little different from other plugins. Specifically, you'll
-notice the differences around setting key-bindings. We start out by requiring
-the module from within its own configuration function and will call the setup
-function explicitly.
+现在我们需要配置 _nvim-cmp_ 以利用代码补全源。
+与许多其他插件不同，_nvim-cmp_ 隐藏了许多内部工作，因此
+配置它与其他插件略有不同。特别是，你会注意到设置键绑定的不同之处。我们首先在其自身的配置函数中要求
+模块，并将显式调用设置函数。
 
 ```lua
 {
@@ -327,13 +292,13 @@ function explicitly.
     config = function()
         local cmp = require('cmp')
         local opts = {
-            -- Where to get completion results from
+            -- 从哪里获取补全结果
             sources = cmp.config.sources {
                 { name = "nvim_lsp" },
                 { name = "buffer"},
                 { name = "path" },
             },
-            -- Make 'enter' key select the completion
+            -- 使 'enter' 键选择补全
             mapping = cmp.mapping.preset.insert({
                 ["<CR>"] = cmp.mapping.confirm({ select = true })
             }),
@@ -343,21 +308,20 @@ function explicitly.
 },
 ```
 
-Using the `tab` key to select completions is a fairly popular option, so we'll
-go ahead and set that up now.
+使用 `tab` 键选择补全是一个相当流行的选项，所以我们现在就设置它。
 
 ```lua
 mapping = cmp.mapping.preset.insert({
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<tab>"] = cmp.mapping(function(original)
         if cmp.visible() then
-            cmp.select_next_item() -- run completion selection if completing
+            cmp.select_next_item() -- 如果正在补全则运行补全选择
         else
-            original()      -- run the original behavior if not completing
+            original()      -- 如果没有补全则运行原始行为
         end
     end, {"i", "s"}),
     ["<S-tab>"] = cmp.mapping(function(original)
-        if cmp.visual() then
+        if cmp.visible() then
             cmp.select_prev_item()
         else
             original()
@@ -366,25 +330,22 @@ mapping = cmp.mapping.preset.insert({
 }),
 ```
 
-Pressing `tab` while the completion menu is visible will select the next
-completion and `shift` + `tab` will select the previous item. The tab behavior
-falls back on whatever pre-defined behavior was there originally if the menu
-isn't visible.
+按下 `tab` 键时，如果补全菜单可见，将选择下一个补全项，而 `shift` + `tab` 将选择上一个项。tab 行为
+如果菜单不可见，则回退到任何预定义的行为。
 
-## Snippets
+## 代码片段
 
-Snippets are a great way to improve your workflow by expanding short pieces of
-text into anything you like. Lets hook those up now. We'll use [_LuaSnip_](https://github.com/L3MON4D3/LuaSnip) as our
-snippet plugin.
+代码片段是通过将短文本片段扩展为任何你喜欢的内容来提高工作流程的好方法。现在让我们连接这些。我们将使用 [_LuaSnip_](https://github.com/L3MON4D3/LuaSnip) 作为我们的
+代码片段插件。
 
-Create a new file in your plugins directory for configuring the snippet plugin.
+在你的插件目录中创建一个新文件，用于配置代码片段插件。
 
 ```lua
 -- lua/plugins/snippets.lua
 return {
     {
         'L3MON4D3/LuaSnip',
-        conifg = function(opts)
+        config = function(opts)
             require('luasnip').setup(opts)
             require('luasnip.loaders.from_snipmate').load({ paths = "./snippets" })
         end,
@@ -392,9 +353,9 @@ return {
 }
 ```
 
-Now we'll wire the snippet expansions into _nvim-cmp_. First, we'll add
-_LuaSnip_ as a dependency of _nvim-cmp_ to ensure that it gets loaded before
-_nvim-cmp_. Then we'll wire it into the tab key expansion behavior.
+现在我们将代码片段扩展连接到 _nvim-cmp_。首先，我们将
+_LuaSnip_ 作为 _nvim-cmp_ 的依赖项添加，以确保它在
+_nvim-cmp_ 之前加载。然后我们将其连接到 tab 键扩展行为。
 
 ```lua
 {
@@ -409,29 +370,29 @@ _nvim-cmp_. Then we'll wire it into the tab key expansion behavior.
     },
     config = function()
         local cmp = require('cmp')
-        local luasnip = require('cmp')
+        local luasnip = require('luasnip')
         local opts = {
-            -- Where to get completion results from
+            -- 从哪里获取补全结果
             sources = cmp.config.sources {
                 { name = "nvim_lsp" },
                 { name = "buffer"},
                 { name = "path" },
             },
             mapping = cmp.mapping.preset.insert({
-                -- Make 'enter' key select the completion
+                -- 使 'enter' 键选择补全
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                -- Super-tab behavior
+                -- 超级 tab 行为
                 ["<tab>"] = cmp.mapping(function(original)
                     if cmp.visible() then
-                        cmp.select_next_item() -- run completion selection if completing
+                        cmp.select_next_item() -- 如果正在补全则运行补全选择
                     elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump() -- expand snippets
+                        luasnip.expand_or_jump() -- 扩展代码片段
                     else
-                        original()      -- run the original behavior if not completing
+                        original()      -- 如果没有补全则运行原始行为
                     end
                 end, {"i", "s"}),
                 ["<S-tab>"] = cmp.mapping(function(original)
-                    if cmp.visual() then
+                    if cmp.visible() then
                         cmp.select_prev_item()
                     elseif luasnip.expand_or_jumpable() then
                         luasnip.jump(-1)
@@ -451,21 +412,17 @@ _nvim-cmp_. Then we'll wire it into the tab key expansion behavior.
 },
 ```
 
-Now our tab-key is thoroughly overloaded in super-tab fashion.
- - If the completion window is open, pressing tab selects the next item in the
-   list.
- - If you press tab over a snippet, the snippet will expand, and continuing to
-   press tab moves the cursor to the next selection point.
- - If you're neither code completing nor expanding a snippet, it will behave
-   like a normal `tab` key.
+现在我们的 tab 键在超级 tab 方式中被彻底重载。
+ - 如果补全窗口打开，按下 tab 将选择列表中的下一个项目。
+ - 如果你在代码片段上按下 tab，代码片段将扩展，并继续按下 tab 将光标移动到下一个选择点。
+ - 如果你既没有代码补全也没有扩展代码片段，它将表现得像一个普通的 `tab` 键。
 
-Now we need to write up some snippets. _LuaSnip_ supports several snippet formats,
-including a subset of the popular
-[TextMate](https://macromates.com/textmate/manual/snippets),
-[Visual Studio Code](https://code.visualstudio.com/docs/editor/userdefinedsnippets) snippet format,
-and its own [Lua-based](https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua) API.
+现在我们需要编写一些代码片段。_LuaSnip_ 支持多种代码片段格式，
+包括流行的 [TextMate](https://macromates.com/textmate/manual/snippets) 的子集，
+[Visual Studio Code](https://code.visualstudio.com/docs/editor/userdefinedsnippets) 代码片段格式，
+以及其自己的 [基于 Lua 的](https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua) API。
 
-Here are some snippets that I've found to be useful:
+以下是一些我发现有用的代码片段：
 
 ```snipmate
 snippet pub "public access control"
@@ -517,21 +474,17 @@ snippet main
   }$0
 ```
 
-Another popular snippet plugin worth mentioning is
-[UltiSnips](https://github.com/SirVer/ultisnips) which allows you to use inline
-Python while defining the snippet, allowing you to write some very powerful
-snippets.
+另一个值得一提的流行代码片段插件是
+[UltiSnips](https://github.com/SirVer/ultisnips)，它允许你在定义代码片段时使用内联
+Python，从而可以编写一些非常强大的代码片段。
 
-# Conclusion
+# 结论
 
-Swift development with Neovim is a solid experience once everything is
-configured correctly. There are thousands of plugins for you to explore, this
-article gives you a solid foundation for building up your Swift development
-experience in Neovim.
+一旦一切配置正确，使用 Neovim 进行 Swift 开发将是一个很好的体验。这里有成千上万的插件供你探索，本文为你在 Neovim 中构建 Swift 开发体验提供了一个坚实的基础。
 
-# Files
+# 文件
 
-Here are the files for this configuration in their final form.
+以下是这些配置文件的最终形式。
 
 ```lua
 -- init.lua
@@ -736,4 +689,4 @@ snippet main
       $2
     }
   }$0
-```
+  ```

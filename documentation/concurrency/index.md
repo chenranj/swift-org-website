@@ -1,37 +1,37 @@
 ---
 layout: page
 date: 2024-03-03 12:00:00
-title: Enabling Complete Concurrency Checking
+title: 启用完整并发检查
 ---
 
-Data-race safety in the Swift 6 language mode is designed for incremental migration. You can address data-race safety issues in your projects module-by-module, and you can enable the compiler's actor isolation and `Sendable` checking as warnings in the Swift 5 language mode, allowing you to assess your progress toward eliminating data races before turning on the Swift 6 language mode.
+Swift 6 语言模式中的数据竞争安全性设计支持增量迁移。您可以逐个模块地解决项目中的数据竞争安全性问题，并且可以在 Swift 5 语言模式下将编译器的 actor 隔离和 `Sendable` 检查设置为警告，这样您可以在开启 Swift 6 语言模式之前评估消除数据竞争的进度。
 
-Complete data-race safety checking can be enabled as warnings in the Swift 5 language mode using the `-strict-concurrency` compiler flag.
+可以使用 `-strict-concurrency` 编译器标志在 Swift 5 语言模式下将完整的数据竞争安全检查设置为警告。
 
-## Using the Swift compiler
+## 使用 Swift 编译器
 
-To enable complete concurrency checking when running `swift` or `swiftc` directly at the command line, pass `-strict-concurrency=complete`:
+要在命令行直接运行 `swift` 或 `swiftc` 时启用完整并发检查，请传入 `-strict-concurrency=complete`：
 
 ```
 ~ swift -strict-concurrency=complete main.swift
 ```
 
-## Using SwiftPM
+## 使用 SwiftPM
 
-### In a SwiftPM command-line invocation
+### 在 SwiftPM 命令行调用中
 
-`-strict-concurrency=complete` can be passed in a Swift package manager command-line invocation using the `-Xswiftc` flag:
+可以使用 `-Xswiftc` 标志在 Swift 包管理器命令行调用中传入 `-strict-concurrency=complete`：
 
 ```
 ~ swift build -Xswiftc -strict-concurrency=complete
 ~ swift test -Xswiftc -strict-concurrency=complete
 ```
 
-This can be useful to gauge the amount of concurrency warnings before adding the flag permanently in the package manifest as described in the following section.
+这对于在按照下一节所述在包清单中永久添加该标志之前，评估并发警告的数量很有帮助。
 
-### In a SwiftPM package manifest
+### 在 SwiftPM 包清单中
 
-To enable complete concurrency checking for a target in a Swift package using Swift 5.9 or Swift 5.10 tools, use [`SwiftSetting.enableExperimentalFeature`](https://developer.apple.com/documentation/packagedescription/swiftsetting/enableexperimentalfeature(_:_:)) in the Swift settings for the given target:
+要在使用 Swift 5.9 或 Swift 5.10 工具的 Swift 包中为目标启用完整并发检查，请在给定目标的 Swift 设置中使用 [`SwiftSetting.enableExperimentalFeature`](https://developer.apple.com/documentation/packagedescription/swiftsetting/enableexperimentalfeature(_:_:))：
 
 ```swift
 .target(
@@ -42,7 +42,7 @@ To enable complete concurrency checking for a target in a Swift package using Sw
 )
 ```
 
-When using Swift 6.0 tools or later, use [`SwiftSetting.enableUpcomingFeature`](https://developer.apple.com/documentation/packagedescription/swiftsetting/enableupcomingfeature(_:_:)) in the Swift settings for the given target:
+当使用 Swift 6.0 或更高版本的工具时，请在给定目标的 Swift 设置中使用 [`SwiftSetting.enableUpcomingFeature`](https://developer.apple.com/documentation/packagedescription/swiftsetting/enableupcomingfeature(_:_:))：
 
 ```swift
 .target(
@@ -53,12 +53,12 @@ When using Swift 6.0 tools or later, use [`SwiftSetting.enableUpcomingFeature`](
 )
 ```
 
-## Using Xcode
+## 使用 Xcode
 
-To enable complete concurrency checking in an Xcode project, set the "Strict Concurrency Checking" setting to "Complete" in the Xcode build settings. Alternatively, you can set `SWIFT_STRICT_CONCURRENCY` to `complete` in an xcconfig file:
+要在 Xcode 项目中启用完整并发检查，请在 Xcode 构建设置中将"Strict Concurrency Checking"设置为"Complete"。或者，您可以在 xcconfig 文件中将 `SWIFT_STRICT_CONCURRENCY` 设置为 `complete`：
 
 ```
-// In a Settings.xcconfig
+// 在 Settings.xcconfig 中
 
 SWIFT_STRICT_CONCURRENCY = complete;
 ```
