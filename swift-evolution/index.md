@@ -1,24 +1,24 @@
 ---
 layout: page
-title: Swift Evolution
+title: Swift 演进
 ---
 
-Anyone with a good idea can help shape the future features and direction of the language.
-To reach the best possible solution to a problem,
-we discuss and iterate on ideas in a
-[public forum](/community/#swift-evolution).
-Once a proposal is refined and approved,
-it becomes a release goal,
-and is tracked as a feature of an upcoming version of Swift.
+任何有好想法的人都可以帮助塑造语言的未来特性和方向。
+为了达到解决问题的最佳可能方案，
+我们在[公共论坛](/community/#swift-evolution)中
+讨论和迭代想法。
+一旦提案被完善和批准，
+它就成为一个发布目标，
+并作为即将发布的 Swift 版本的一个特性进行跟踪。
 
-To support this process,
-the [Swift Evolution repository](https://github.com/swiftlang/swift-evolution)
-collects the goals for the upcoming major and minor releases
-(as defined by the [core team](/community/#core-team))
-as well as proposals for changes to Swift.
-The [Swift evolution process](https://github.com/swiftlang/swift-evolution/blob/main/process.md) document details how ideas are
-proposed, discussed, reviewed, and eventually accepted into upcoming releases.
+为了支持这个过程，
+[Swift Evolution 仓库](https://github.com/swiftlang/swift-evolution)
+收集了即将发布的主要和次要版本的目标
+(由[核心团队](/community/#core-team)定义)
+以及对 Swift 变更的提案。
+[Swift 演进过程](https://github.com/swiftlang/swift-evolution/blob/main/process.md)文档详细说明了想法是如何被
+提出、讨论、审查并最终被接受到即将发布的版本中的。
 
-Below is a list of all the current and upcoming proposal reviews.
+以下是所有当前和即将进行的提案审查列表。
 
 {% include_relative _dashboard.html %}

@@ -1,12 +1,3 @@
-// This source file is part of the Swift.org open source project
-//
-// Copyright (c) 2014 - 2024 Apple Inc. and the Swift project authors
-// Licensed under Apache License v2.0 with Runtime Library Exception
-//
-// See http://swift.org/LICENSE.txt for license information
-// See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
-//
-// ===---------------------------------------------------------------------===//
 'use strict'
 
 const EVOLUTION_METADATA_URL = 'https://download.swift.org/swift-evolution/v1/evolution.json'
@@ -55,69 +46,69 @@ const State = Object.freeze({
  */
 const states = {
   [State.awaitingReview]: {
-    name: 'Awaiting Review',
-    shortName: 'Awaiting Review',
+    name: '等待审查',
+    shortName: '等待审查',
     className: 'awaiting-review',
     count: 0
   },
   [State.scheduledForReview]: {
-    name: 'Scheduled for Review',
-    shortName: 'Scheduled',
+    name: '已安排审查',
+    shortName: '已安排',
     className: 'scheduled-for-review',
     count: 0
   },
   [State.activeReview]: {
-    name: 'Active Review',
-    shortName: 'Active Review',
-    statusPrefix: 'In ',
+    name: '正在审查',
+    shortName: '正在审查',
+    statusPrefix: '正在',
     className: 'active-review',
     count: 0
   },
   [State.returnedForRevision]: {
-    name: 'Returned for Revision',
-    shortName: 'Returned',
+    name: '退回修改',
+    shortName: '已退回',
     className: 'returned-for-revision',
     count: 0
   },
   [State.withdrawn]: {
-    name: 'Withdrawn',
-    shortName: 'Withdrawn',
+    name: '已撤回',
+    shortName: '已撤回',
     className: 'withdrawn',
     count: 0
   },
   [State.accepted]: {
-    name: 'Accepted',
-    shortName: 'Accepted',
+    name: '已接受',
+    shortName: '已接受',
     className: 'accepted',
     count: 0
   },
   [State.acceptedWithRevisions]: {
-    name: 'Accepted with revisions',
-    shortName: 'Accepted',
+    name: '已接受(需修改)',
+    shortName: '已接受',
     className: 'accepted-with-revisions',
     count: 0
   },
   [State.rejected]: {
-    name: 'Rejected',
-    shortName: 'Rejected',
+    name: '已拒绝',
+    shortName: '已拒绝',
     className: 'rejected',
     count: 0
   },
   [State.implemented]: {
-    name: 'Implemented',
-    shortName: 'Implemented',
+    name: '已实现',
+    shortName: '已实现',
     className: 'implemented',
     count: 0
   },
   [State.previewing]: {
-    name: 'Previewing',
-    shortName: 'Previewing',
+    name: '预览中',
+    shortName: '预览中',
     className: 'previewing',
     count: 0
   },
   [State.error]: {
-    name: 'Error',
-    shortName: 'Error',
+    name: '错误',
+    shortName: '错误',
     className: 'error',
     count: 0
   }
@@ -379,7 +370,7 @@ function renderProposals() {
 function renderAuthors(authors) {
   return html('div', { className: 'authors proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' },
-      authors.length > 1 ? 'Authors: ' : 'Author: '
+      authors.length > 1 ? '作者：' : '作者：'
     ),
     html('div', { className: 'proposal-detail-value' },
       personNodesForPersonArray(authors))
@@ -390,7 +381,7 @@ function renderAuthors(authors) {
 function renderReviewManagers(reviewManagers) {
   return html('div', { className: 'review-managers proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' },
-      reviewManagers.length > 1 ? 'Review Managers: ' : 'Review Manager: '
+      reviewManagers.length > 1 ? '审核负责人：' : '审核负责人：'
     ),
     html('div', { className: 'proposal-detail-value' }, 
       personNodesForPersonArray(reviewManagers))
@@ -419,7 +410,7 @@ function renderTrackingBugs(bugs) {
 
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [
-      bugs.length > 1 ? 'Bugs: ' : 'Bug: '
+      bugs.length > 1 ? '缺陷：' : '缺陷：'
     ]),
     html('div', { className: 'bug-list proposal-detail-value' },
       bugNodes
@@ -441,7 +432,7 @@ function renderImplementation(implementations) {
 
   implNodes = _joinNodes(implNodes, ', ')
 
-  var label = 'Implementation: '
+  var label = '部署：'
 
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [label]),
@@ -481,7 +472,7 @@ function renderPreview() {
 function renderVersion(version) {
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [
-      'Implemented In: '
+      '部署在'
     ]),
     html('div', { className: 'proposal-detail-value' }, [
       'Swift ' + version
@@ -493,7 +484,7 @@ function renderVersion(version) {
 function renderStatus (status) {
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [
-      'Status: '
+      '状态：'
     ]),
     html('div', { className: 'proposal-detail-value' }, [
       states[status.state].name
@@ -535,7 +526,7 @@ function renderReviewPeriod (status) {
 
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [
-      'Scheduled: '
+      '计划时间：'
     ]),
     html('div', { className: 'proposal-detail-value' }, detailNodes)
   ])
