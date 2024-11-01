@@ -150,10 +150,10 @@ function init() {
   })
 
   req.addEventListener('error', function (e) {
-    document.querySelector('#proposals-count-number').innerText = 'Proposal data failed to load.'
+    document.querySelector('#proposals-count-number').innerText = '提案数据加载失败'
   })
 
-  document.querySelector('#proposals-count-number').innerHTML = 'Loading…'
+  document.querySelector('#proposals-count-number').innerHTML = '加载中……'
   req.open('get', EVOLUTION_METADATA_URL)
   req.send()
 }
@@ -244,7 +244,7 @@ function renderSearchBar () {
   })
 
   var expandableArea = html('div', { className: 'filter-options expandable' }, [
-    html('h5', { id: 'filter-options-label' }, 'Status'),
+    html('h5', { id: 'filter-options-label' }, '状态'),
     html('ul', { id: 'status-options', className: 'filter-list' })
   ])
 
@@ -446,7 +446,7 @@ function renderImplementation(implementations) {
 function renderUpcomingFeatureFlag(upcomingFeatureFlag) {
   return html('div', { className: 'proposal-detail' }, [
     html('div', { className: 'proposal-detail-label' }, [
-      'Upcoming Feature Flag: '
+      '即将发布的功能标记'
     ]),
     html('div', { className: 'proposal-detail-value' }, [
       upcomingFeatureFlag
@@ -462,7 +462,7 @@ function renderPreview() {
     ]),
     html('div', { className: 'proposal-detail-value' }, [
       html('a', { href: 'https://github.com/apple/swift-standard-library-preview', target: '_blank' },
-        'Standard Library Preview'
+        '标准库预览'
       )
     ])
   ])
@@ -496,8 +496,8 @@ function renderStatus (status) {
  * Review periods are ISO-8601-style 'YYYY-MM-DD' dates.
  */
 function renderReviewPeriod (status) {
-  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December'
+  var months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月',
+    '八月', '九月', '十月', '十一月', '十二月'
   ]
 
   var start = new Date(status.start)
@@ -1112,12 +1112,12 @@ function updateStatusFilterToggleText(filterCount) {
   if (filterCount === 0) {
     var panel = document.querySelector('.expandable')
     if (panel.classList.contains('expanded')) {
-      container.innerText = 'Hide Filters'
+      container.innerText = '隐藏过滤器'
     } else {
-      container.innerText = 'Show Filters'
+      container.innerText = '显示过滤器'
     }
   } else {
-    container.innerText = filterCount + ' Filter' + ((filterCount !== 1) ? 's' : '')
+    container.innerText = filterCount + ' 过滤' + ((filterCount !== 1) ? '' : '')
   }
 }
 
@@ -1129,15 +1129,15 @@ function updateStatusFilterToggleText(filterCount) {
 function updateProposalsCount (count) {
   // Calculate and set value of proposal count span
   var numberField = document.querySelector('#proposals-count-number')
-  var baseString = (count.toString() + ' proposal' + (count !== 1 ? 's' : ''))
+  var baseString = (count.toString() + ' 件提案' + (count !== 1 ? '' : ''))
   numberField.innerHTML = baseString
 
   // Calculate and set value of flag filter description span
   var flagFilterDescription = document.querySelector('#flag-filter-description')
   if (upcomingFeatureFlagFilterEnabled) {
     var anchorTag = '<a href="' + UFF_INFO_URL + '">'
-    var uffText = 'upcoming feature flag' + (count !== 1 ? 's' : '')
-    flagFilterDescription.innerHTML = " with "+ (count !== 1 ? '' : 'an ') + anchorTag + uffText + '</a>'
+    var uffText = '即将推出的功能被标记' + (count !== 1 ? '' : '')
+    flagFilterDescription.innerHTML = "在"+ (count !== 1 ? '' : '') + anchorTag + uffText + '</a>'
   } else {
     flagFilterDescription.innerHTML = ""
   }
@@ -1178,14 +1178,14 @@ function descriptionForSelectedStatuses(selectedOptions) {
   let allExceptThreshold = totalCount - ALL_EXCEPT_MAX_COUNT
 
   if (selectedCount === 0 || selectedCount === totalCount) {
-    return "All Statuses"
+    return "全部状态"
   } else if (selectedCount >= allExceptThreshold) {
     let unselectedOptions = allStateOptions.filter(function (option) {
       return selectedOptions.indexOf(option) === -1
     })
-    return "All Statuses Except " + listStringForStatuses(unselectedOptions, "and", false)
+    return "除了" + listStringForStatuses(unselectedOptions, "和", false) + "之外的所有状态"
   } else {
-    return listStringForStatuses(selectedOptions, "or", true)
+    return listStringForStatuses(selectedOptions, "或", true)
   }
 }
 
