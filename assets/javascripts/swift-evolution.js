@@ -506,21 +506,26 @@ function renderReviewPeriod (status) {
   var startMonth = start.getUTCMonth()
   var endMonth = end.getUTCMonth()
 
-  var detailNodes = [months[startMonth], ' ']
+  var detailNodes = [months[startMonth]]
 
   if (startMonth === endMonth) {
     detailNodes.push(
       start.getUTCDate().toString(),
+      '日',
       '–',
-      end.getUTCDate().toString()
+      end.getUTCDate().toString(),
+      '日'
     )
   } else {
     detailNodes.push(
       start.getUTCDate().toString(),
+      '日',
       ' – ',
       months[endMonth],
-      ' ',
+      '',
       end.getUTCDate().toString()
+      ,
+      '日'
     )
   }
 
@@ -1135,8 +1140,7 @@ function updateProposalsCount (count) {
   // Calculate and set value of flag filter description span
   var flagFilterDescription = document.querySelector('#flag-filter-description')
   if (upcomingFeatureFlagFilterEnabled) {
-    var anchorTag = '<a href="' + UFF_INFO_URL + '">'
-    var uffText = '即将推出的功能被标记' + (count !== 1 ? '' : '')
+    var uffText = '即将推出的功能标记' + (count !== 1 ? '' : '')
     flagFilterDescription.innerHTML = "在"+ (count !== 1 ? '' : '') + anchorTag + uffText + '</a>'
   } else {
     flagFilterDescription.innerHTML = ""
